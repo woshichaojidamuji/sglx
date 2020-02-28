@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TestController {
     @GetMapping("/test")
     public String test(Model model) {
-        model.addAttribute("name", "姚伟");
+        model.addAttribute("name", "张涵锐");
         return "test";
     }
 }

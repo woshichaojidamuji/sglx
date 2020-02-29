@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FruitController {
 
     @GetMapping("/list")
-    public String test() {
+    public String list() {
         return "shop";
+    }
+
+    @GetMapping("/fruit")
+    public String detail(){
+        return "shop-details";
     }
 }

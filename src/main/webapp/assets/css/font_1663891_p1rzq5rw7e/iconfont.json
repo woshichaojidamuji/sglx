@@ -1,0 +1,16 @@
+{
+  "id": "1663891",
+  "name": "图标",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5016693",
+      "name": "苹果",
+      "font_class": "pingguo",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    }
+  ]
+}

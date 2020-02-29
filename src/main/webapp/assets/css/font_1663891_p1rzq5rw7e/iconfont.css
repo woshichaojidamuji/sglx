@@ -1,0 +1,21 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1582976731491'); /* IE9 */
+  src: url('iconfont.eot?t=1582976731491#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAPoAAsAAAAAB8AAAAOaAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAqDSIMaATYCJAMICwYABCAFhG0HMRvBBlGUrM0e2deYDBlTXwSKGjNAgQgKAmDjjEPYPRfg4cPxh2AdAAAiqPZ769nPoIIk41kDCxeFLhEqfCzFuWOhrjwb8S5t2gaIFWKQHWBJdzmTPDo50D1CxVB+B0AlQUtcfy4sXnY/AObfqW1CtejdUuY6GTIhiVY+41WswsTa1tZe9GRdKZmJ5b+jFRQtkSXv8bgBl9P/rzTgeUC5jLlsD34MMA4ooDGGrSVcQIFxw9hNlAexnUDVmBxO2209I+ApD/QLxLmmzoFnyipfUxrKQrFkah7iLTfltDn9APCGfz/+Q1F4gqSQA1Cxd9ZKoeGXO8xwWZVlJqnd6vHc0GaRwwqQJ45KvTtcwvgKF1Un7moKrKs0+OX+P6PS1f7xCKIIoLgORkTpOcmw/FR/mUAeNXwAvvRqQlXFjAwOcfKAb2PY0IVK5JuvdWzRn8uAz9gT48x2aqe+W0vvK9CeMYoegRgZvLDhx11YLalVQrH4JOmFyufpgdMSlvVd8k+fFxuRleKjrq5LYdUKdvqgJ3U2q+7P/HFz5V4OW5qWBfqOD5vWeeUN5LKqjQP39+ynZ3QPhYq7DRUhRf2+O2/K5nt2uaW0Yawf4ok0MrzdFZuGTNjVmEt5Yl6FS5d1c+7ZVTa/c6nftyj9Vj7ZMh03NoLGnaFIVo3FQ8iW/I7bV46eSd/VGXj1KlbtCkUpNn1w7m7f1bc5o78+pA4+cyn4mHIu+vLl6ZS1McU+HvfOuXdG0EiQ+7lPHj7F+0+lhWOcg+ypYUFTX1wc8Oplq9j/46dnstunj81in+9h36EByGTLu7is+nX7OT38QGYCav6VuQL8XMXfcGU7PyjfoC/4UZr8KASlqwDWlLetGSmdfODzAjRVNyALBLve9zUO3ko6lA3ejb9kNEZO2QyZZ62goGYVRWVrqFrWPrumR3AReS9gyXoBoe0skqaPyGl7SuZZ71Aw9A1F7XBB1UmELFkzF5p3s2BzklE0v4I0wm0KckjvoHSIqQ7LnEgqOMfAhK6FUGFeQTbVzmxMjDFCX1SLpFSQIrgVtQm7MYuFI7vgJkZk3oKU9qr8fKXsRnmEW8HbFoGZIzEUMm8FoiE4G4XWlrxznx/CqBws5ogaWkfYgBF0WuNIoTwFLch2ra0V7VoO0S1SFZEkBaIQOCukTXAzFhjnEHt5JxOGkPIs9IjaVcmXqilttXnz661Ptw6qgCkFbOsCpWvNpqoODgAAAA==') format('woff2'),
+  url('iconfont.woff?t=1582976731491') format('woff'),
+  url('iconfont.ttf?t=1582976731491') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1582976731491#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pingguo:before {
+  content: "\e606";
+}
+

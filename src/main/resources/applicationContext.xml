@@ -22,6 +22,17 @@
     <property name="configLocation" value="classpath:mybatis-config.xml" />
     <property name="mapperLocations" value="classpath:mapper/*.xml" />
     <property name="typeAliasesPackage" value="com.yaowei.entity" />  <!--起别名-->
+    <property name="plugins">
+      <array>
+        <bean class="com.github.pagehelper.PageInterceptor">
+          <property name="properties">
+            <props>
+              <prop key="helperDialect">mysql</prop>
+            </props>
+          </property>
+        </bean>
+      </array>
+    </property>
   </bean>
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

@@ -17,7 +17,11 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
-
+    <style>
+        .icon{
+            width: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,7 +75,12 @@
                                     <h5><i class="flaticon-list"></i>分类</h5>
                                 </div>
                                 <ul>
-                                    <li><a href="${path}/list?kind=5001"><i class="iconfont icon-pingguo"></i> 苹果</a></li>
+                                    <li><a href="${path}/list?kind=5001"><i class="iconfont "></i>
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#iconpingguo"></use>
+                                        </svg>
+                                        苹果
+                                    </a></li>
                                     <li><a href="${path}/list?kind=5002"><i class="flaticon-orange"></i> 橙子</a></li>
                                     <li><a href="${path}/list?kind=5003"><i class="flaticon-pear"></i> 梨</a></li>
                                     <li><a href="${path}/list?kind=5004"><i class="flaticon-banana"></i> 香蕉</a></li>
@@ -647,7 +656,9 @@
 
     <!-- Custom script -->
     <script src="${path}/assets/js/script.js"></script>
-
+    <script >
+        !function(a){var t,c='<svg><symbol id="iconpingguo" viewBox="0 0 1024 1024"><path d="M617.6 345.2L576 335.1c-18.7-4.6-30.2-23.5-25.7-42.2l10.1-41.5c20.9-85.9 107.5-138.7 193.5-117.7l41.5 10.1c18.7 4.6 30.2 23.5 25.7 42.2L811 227.4c-20.9 86-107.5 138.7-193.4 117.8z" fill="#FFD401" ></path><path d="M502.9 944.2c-313.3 0-457.7-305.1-349.3-557 51.4-119.5 153.3-143.9 271.2-133 52.4 4.8 104.1 6 156.6 1.4 109.6-9.5 208.1 8.2 261.9 115.9 129.6 259.4-34.2 572.7-340.4 572.7z" fill="#8BC03C" ></path><path d="M526.7 314.9c-6.9-66.6 30.2-123.5 74.9-169.2 30.5-31.1-17.3-79-47.8-47.8-56.2 57.5-103.3 133.5-94.7 217.1 4.4 42.8 72 43.3 67.6-0.1z" fill="#22802A" ></path><path d="M576 335.1l41.5 10.1c61 14.8 122.3-7.4 160.2-52.3-53.5-37.7-122.4-43.7-196.4-37.3-7.5 0.7-14.9 1.2-22.4 1.6l-8.7 35.7c-4.4 18.7 7.1 37.6 25.8 42.2z" fill="#8BA000" ></path><path d="M459 314.9c4.4 42.9 72.1 43.3 67.6 0-2-19.8-0.1-38.7 4.6-56.7-23.2 0.5-46.3 0-69.5-1.3-3.5 18.8-4.7 38.2-2.7 58z" fill="#13600A" ></path><path d="M256.3 401.5c-15.9 20.1-26 44.3-22.8 70.4 2 16.4 13.2 32.6 31.8 31.8 15.5-0.7 33.9-14.1 31.8-31.8-0.5-4.1-0.6-8-0.6-12 0-6.3-1.5 3 0.7-3.5 0.1-0.4 3.4-9.2 0.9-3.7 0.5-1.2 6.6-10.6 3.1-6.2 10.3-13 13.6-32.4 0-44.9-11.5-10.6-33.9-14-44.9-0.1z" fill="#FFFFFF" ></path></symbol><symbol id="iconlizi" viewBox="0 0 1024 1024"><path d="M725 391.6c0.7-8 0.8-16.2 0.2-24.5-6-93.9-93.5-170.6-202.2-177.1-127.3-7.6-233.3 79.4-233.3 187.7 0 3.2 0.1 6.3 0.3 9.5 3.8 66.3-13.7 132.8-56.5 188C204 613.3 187 658 187 705.7c0 139.6 144.9 252.7 323.7 252.7s323.7-113.1 323.7-252.7c0-48.9-17.8-94.6-48.7-133.3-42.3-53.2-66.1-116.5-60.7-180.8z" fill="#FFD401" ></path><path d="M536 211.3c-3.8-28 2-46.2 15.9-70.4 21.2-37.1-36.1-70.6-57.2-33.5-10 17.5-20.1 36-23.9 56.1-4.3 22.1-1.6 43.4 1.4 65.5 2.4 17.8 25.2 27.4 40.8 23.2 19-5.4 25.5-23.1 23-40.9z" fill="#22802A" ></path><path d="M512.9 252.1c19.1-5.3 25.6-23 23.2-40.8-1-7.4-1.3-14-1-20.3-3.9-0.4-7.9-0.8-11.9-1-18.7-1.1-37-0.1-54.5 2.6 0.3 12.1 1.8 24.1 3.5 36.3 2.3 17.8 25 27.5 40.7 23.2z" fill="#226A00" ></path><path d="M606.5 279.9c-25.3 4.3-49.3-12.7-53.6-38.1-13.8-81.6 41.1-159 122.7-172.9 25.3-4.3 49.3 12.7 53.6 38.1 13.8 81.6-41.1 159-122.7 172.9z" fill="#8BC03C" ></path><path d="M552.9 241.8c4.3 25.3 28.3 42.4 53.6 38.1 23.9-4.1 45.5-13.6 63.8-27.1-30.5-29.5-71.5-50.8-117.7-59.3-2.5 15.6-2.5 31.9 0.3 48.3z" fill="#8BA000" ></path><path d="M365.5 336.1c-15.6 19.7-25.5 43.4-22.3 69 2 16.1 12.9 31.9 31.1 31.1 15.2-0.7 33.3-13.8 31.1-31.1-0.5-4-0.6-7.8-0.5-11.8 0-6.2-1.5 3 0.7-3.4 0.1-0.4 3.3-9 0.9-3.7 0.5-1.1 6.5-10.4 3.1-6.1 10.1-12.7 13.4-31.8 0-44-11.3-10.3-33.3-13.6-44.1 0z" fill="#FFFFFF" ></path></symbol></svg>',e=(t=document.getElementsByTagName("script"))[t.length-1].getAttribute("data-injectcss");if(e&&!a.__iconfont__svg__cssinject__){a.__iconfont__svg__cssinject__=!0;try{document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>")}catch(t){console&&console.log(t)}}!function(t){if(document.addEventListener)if(~["complete","loaded","interactive"].indexOf(document.readyState))setTimeout(t,0);else{var e=function(){document.removeEventListener("DOMContentLoaded",e,!1),t()};document.addEventListener("DOMContentLoaded",e,!1)}else document.attachEvent&&(i=t,l=a.document,o=!1,(c=function(){try{l.documentElement.doScroll("left")}catch(t){return void setTimeout(c,50)}n()})(),l.onreadystatechange=function(){"complete"==l.readyState&&(l.onreadystatechange=null,n())});function n(){o||(o=!0,i())}var i,l,o,c}(function(){var t,e,n,i,l,o;(t=document.createElement("div")).innerHTML=c,c=null,(e=t.getElementsByTagName("svg")[0])&&(e.setAttribute("aria-hidden","true"),e.style.position="absolute",e.style.width=0,e.style.height=0,e.style.overflow="hidden",n=e,(i=document.body).firstChild?(l=n,(o=i.firstChild).parentNode.insertBefore(l,o)):i.appendChild(n))})}(window);
+    </script>
 </body>
 
 </html>

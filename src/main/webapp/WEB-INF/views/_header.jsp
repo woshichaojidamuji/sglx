@@ -24,8 +24,8 @@
                 </ul>
             </div>
 
-            <form action="#" class="menu-search">
-                <input type="search" placeholder="请输入" required>
+            <form action="${path}/list" class="menu-search">
+                <input value="${param.name}" name="name" type="search" placeholder="请输入" required>
                 <button type="submit">搜索</button>
             </form>
 
@@ -40,8 +40,8 @@
                     <i class="flaticon-user-1"></i>
                     <div class="collection-inner">
                         <ul>
-                            <li><a href="cart.jsp">购物车</a></li>
-                            <li><a href="checkout.jsp">订单</a></li>
+                            <li><a href="${path}/cart">购物车</a></li>
+                            <li><a href="${path}/order">订单</a></li>
                             <c:if test="${sessionScope.user==null}">
                                 <li><a href="${path}/login">登录</a></li>
                                 <li><a href="${path}/register">注册</a></li>

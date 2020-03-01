@@ -18,6 +18,42 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btn-addCart").click(function () {
+                var fid = ${param.fid};
+                var quantity = $("input[name='quantity']").val();
+                $.ajax({
+                    url:"${path}/addCart",
+                    type:"post",
+                    data:{
+                        fid:fid,
+                        quantity:quantity
+                    },
+                    success:function (res) {
+                        if (res.isLogin === false){
+                            alert("请先登录");
+                            location = "${path}/login?uri="+res.uri;
+                            return;
+                        }
+                        if (res.success){
+                            alert("添加成功");
+                            location = "${path}/fruit?fid="+fid;
+                        }else {
+                            alert("添加失败，库存不足");
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
+    <style>
+        .icon{
+            width: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -70,100 +106,40 @@
                         <div class="shop-sidebar">
                             <div class="shop-widget b1">
                                 <div class="shop-widget-title">
-                                    <h5><i class="flaticon-list"></i>Categories</h5>
+                                    <h5><i class="flaticon-list"></i>分类</h5>
                                 </div>
                                 <ul>
-                                    <li><a href="shop.jsp"><i class="flaticon-apple"></i> Fruits and Vegetables</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-chicken-hand-drawn-outline"></i> Meat and Fish</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-pressure-washer"></i> Home and Cleaning</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-pest"></i> Pest Control</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-stationery"></i> Office Products</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-make-up"></i> Beauty Products</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-first-aid-kit"></i> Health Products</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-track"></i> Pet Care</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-sketch"></i> Home Appliances</a></li>
-                                    <li><a href="shop.jsp"><i class="flaticon-baby-boy"></i> Baby Care</a></li>
+                                    <li><a href="${path}/list?kid=5001">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-pingguo"></use>
+                                        </svg>
+                                        苹果</a>
+                                    </li>
+                                    <li><a href="${path}/list?kid=5002">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-chengzi1"></use>
+                                        </svg>
+                                        橙子</a>
+                                    </li>
+                                    <li><a href="${path}/list?kid=5003">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-pear"></use>
+                                        </svg>
+                                        梨</a>
+                                    </li>
+                                    <li><a href="${path}/list?kid=5004">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangjiao"></use>
+                                        </svg>
+                                        香蕉</a>
+                                    </li>
+                                    <li><a href="${path}/list?kid=5005">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xigua"></use>
+                                        </svg>
+                                        西瓜</a>
+                                    </li>
                                 </ul>
-                            </div>
-                            <div class="shop-widget b1">
-                                <div class="shop-widget-title">
-                                    <h5>Best Sale Today</h5>
-                                </div>
-                                <div class="product list-product d-flex align-items-center bg-white br-5 mb-30">
-                                    <div class="product-img-wrap">
-                                        <img src="${path}/assets/img/shop/cart-1.png" alt="img">
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-content">
-                                            <p><a href="shop-details.jsp">Cauliflower <br>(1kg)</a>
-                                            </p>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="add-to-btn small-btn">
-                                                <i class="flaticon-shopping-cart"></i>
-                                                <span>Add to Cart</span>
-                                                <h5 class="product-price">$120.00</h5>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product list-product d-flex align-items-center bg-white br-5 mb-30">
-                                    <div class="product-img-wrap">
-                                        <img src="${path}/assets/img/shop/cart-2.png" alt="img">
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-content">
-                                            <p><a href="shop-details.jsp">Organic Yellow Papaya (1ps)</a></p>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="add-to-btn small-btn">
-                                                <i class="flaticon-shopping-cart"></i>
-                                                <span>Add to Cart</span>
-                                                <h5 class="product-price">$120.00</h5>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product list-product d-flex align-items-center bg-white br-5 mb-30">
-                                    <div class="product-img-wrap">
-                                        <img src="${path}/assets/img/shop/cart-3.png" alt="img">
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-content">
-                                            <p><a href="shop-details.jsp">Granny Smith Apple (4ps)</a></p>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="add-to-btn small-btn">
-                                                <i class="flaticon-shopping-cart"></i>
-                                                <span>Add to Cart</span>
-                                                <h5 class="product-price">$120.00</h5>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="shop-widget widget-product b1">
-                                <!--widget-product -->
-                                <div class="special-offer-product bg-white p-25 br-5">
-                                    <div class="off">10%<span>off</span></div>
-                                    <div class="product-img-wrap">
-                                        <img src="${path}/assets/img/product/product3.png" alt="img">
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="offer-product-price">
-                                            <span class="discounted-price">$120.00</span>
-                                            <span class="actual-price has-discount">$120.00</span>
-                                        </div>
-                                        <p><a href="shop-details.jsp">Organic Granny Smith <br>Apple (4ps)</a></p>
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="#" class="add-to-btn">Add to Cart</a>
-                                        <div class="add-wishlist text-center">
-                                            <i class="fa fa-heart-o"></i>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -177,38 +153,30 @@
                                     <div class="product-preview-wrap">
                                         <div class="tab-content bg-white p-50 b1 br-5">
                                             <div class="tab-pane" id="preview1">
-                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
+                                                <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/1.jpg" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
                                             </div>
                                             <div class="tab-pane active" id="preview2">
-                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
+                                                <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/2.jpg" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
                                             </div>
                                             <div class="tab-pane" id="preview3">
-                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
-                                            </div>
-                                            <div class="tab-pane" id="preview4">
-                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
+                                                <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/3.jpg" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
                                             </div>
                                         </div>
 
                                         <ul class="nav nav-tabs mt-30">
                                             <li>
                                                 <a data-toggle="tab" href="#preview1">
-                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
+                                                    <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/1.jpg" alt="Product Thumbnail Image" />
                                                 </a>
                                             </li>
                                             <li>
                                                 <a class="active" data-toggle="tab" href="#preview2">
-                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
+                                                    <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/2.jpg" alt="Product Thumbnail Image" />
                                                 </a>
                                             </li>
                                             <li>
                                                 <a data-toggle="tab" href="#preview3">
-                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a data-toggle="tab" href="#preview4">
-                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
+                                                    <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/3.jpg" alt="Product Thumbnail Image" />
                                                 </a>
                                             </li>
                                         </ul>
@@ -216,7 +184,7 @@
                                 </div>
                                 <div class="col-xl-7">
                                     <div class="product-details text-left bg-white px-50 py-45 b1 br-5">
-                                        <h3 class="mb-25 rmt-25">Fresh Onion 1kg</h3>
+                                        <h3 class="mb-25 rmt-25">${requestScope.fruit.name}(500g)</h3>
                                         <div class="rating mb-25">
                                             <div class="star mr-15">
                                                 <i class="fa fa-star"></i>
@@ -225,346 +193,25 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                             </div>
-                                            <div class="text">(13 Review)</div>
                                         </div>
-                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper evitluctus metus libero eu augue. Morbi s libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praest elemhendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat.</p>
-                                        <p>lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu.</p>
+                                        <p>${requestScope.fruit.description}</p>
 
-                                        <h6 class="stock">Availability: <span>In Stock</span></h6>
-                                        <h4 class="price">$120.00</h4>
+                                        <h6 class="stock">库存: <span>${requestScope.fruit.stock}</span></h6>
+                                        <h6 class="stock">销量: <span>${requestScope.fruit.sales}</span></h6>
+                                        <h4 class="price">${requestScope.fruit.price}</h4>
                                         
                                         <div class="product-spinner mt-20">
                                             <div class="number-input b1">
                                               <button class="minus"></button>
-                                              <input min="1" name="quantity" value="2" type="number">
+                                              <input min="1" name="quantity" value="1" type="number" max="${requestScope.fruit.stock}">
                                               <button class="plus"></button>
                                             </div>
-                                            <a href="#" class="theme-btn br-30 ml-25">Add to Cart</a>
+                                            <a id="btn-addCart" href="javascript:void (0)" class="theme-btn br-30 ml-25">加入购物车</a>
                                             <div class="add-wishlist">
                                                 <i class="fa fa-heart-o"></i>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <!-- product-details-tab/review -->
-                            <div class="product-details-review bg-white mt-60 px-50 pt-20 pb-30 b1 br-5">
-                                <ul class="nav nav-tabs mb-20 mt-10">
-                                    <li><a href="#details" class="active" data-toggle="tab">Description</a></li>
-                                    <li><a href="#addi-info" data-toggle="tab" class="">Additional information</a></li>
-                                    <li><a href="#review" data-toggle="tab" class="">Reviews</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="details">
-                                        <p>Morbi non accumsan libero, volutpat ullamcorper odio. Donec non libero id augue suscipit commodo. Curabitur porta ac ligula vel sollicitudin. Praesent vestibulum tellus urna, in imperdiet neque lobortis eleifend. Nunc eros nulla, porta quis urna nec, luctus viverra diam. In ut ante est. Duis venenatis erat ac nisl malesuada gravida. Pellentesque pellentesque tempor urna, quis vehicula mi mollis hendrerit. Etiam iaculis convallis arcu, id lacinia massa imperdiet vitae.</p>
-                                        <p>Nam accumsan a augue ut lobortis. Ut ac libero vel libero consectetur dictum ac in ante. Pellentesque efficitur nibh id condimentum blandit. Phasellus vulputate, tellus in vestibulum feugiat, felis nisl pulvinar mi, mollis eleifend orci risus sit amet orci. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas vitae viverra risus. Vivamus eget accumsan elit, tincidunt pharetra orci. Maecenas neque mi, porttitor eu ullamcorper nec, aliquet eu nulla. Mauris maximus turpis tellus, vel aliquam neque aliquet accumsan. Maecenas ultrices facilisis libero, eu laoreet mauris. Integer non aliquam sapien, ut auctor sem. Vivamus urna urna, eleifend eget augue sed, pulvinar rutrum enim. Nullam lacinia mauris vel mattis lacinia.</p>
-                                    </div>
-                                    <div class="tab-pane" id="addi-info">
-                                        <p>Morbi non accumsan libero, volutpat ullamcorper odio. Donec non libero id augue suscipit commodo. Curabitur porta ac ligula vel sollicitudin. Praesent vestibulum tellus urna, in imperdiet neque lobortis eleifend. Nunc eros nulla, porta quis urna nec, luctus viverra diam. In ut ante est. Duis venenatis erat ac nisl malesuada gravida. Pellentesque pellentesque tempor urna, quis vehicula mi mollis hendrerit. Etiam iaculis convallis arcu, id lacinia massa imperdiet vitae.</p>
-                                    </div>
-                                    <div class="tab-pane" id="review">
-
-                                        <!-- product-review-comments -->
-                                        <div class="product-review-comments">
-
-                                            <!-- dubble-comments -->
-                                            <div class="latest-comments">
-                                                <div class="comments-box">
-                                                    <div class="comments-avatar">
-                                                        <img src="${path}/assets/img/shop/reviewer-1.png" alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div class="avatar-name">
-                                                            <h5>Daniel R. Stockton</h5>
-                                                            <span>3 Days Ago</span>
-                                                            <div class="ratings">
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitaus metus lib eu augue. Morbi purus libero, faucibadipisci commodo quis, grav, est. Sed lectus.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="child comments-box">
-                                                    <div class="comments-avatar">
-                                                        <img src="${path}/assets/img/shop/reviewer-1.png" alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div class="avatar-name">
-                                                            <h5>Daniel R. Stockton</h5>
-                                                            <span>3 Days Ago</span>
-                                                        </div>
-                                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- singlepost-comments -->
-                                            <div class="latest-comments">
-                                                <div class="comments-box">
-                                                    <div class="comments-avatar">
-                                                        <img src="${path}/assets/img/shop/reviewer-1.png" alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div class="avatar-name">
-                                                            <h5>Daniel R. Stockton</h5>
-                                                            <span>3 Days Ago</span>
-                                                            <div class="ratings">
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitaus metus eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, grav, est. Sed lectus.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- singlepost-comments -->
-                                            <div class="latest-comments">
-                                                <div class="comments-box">
-                                                    <div class="comments-avatar">
-                                                        <img src="${path}/assets/img/shop/reviewer-1.png" alt="">
-                                                    </div>
-                                                    <div class="comments-text">
-                                                        <div class="avatar-name">
-                                                            <h5>Daniel R. Stockton</h5>
-                                                            <span>3 Days Ago</span>
-                                                            <div class="ratings">
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                                <i class="flaticon-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitaus metus eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, grav, est. Sed lectus.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Related Product -->
-                            <div class="related-product mt-110 rmt-75">
-                                <h3 class="mb-35">Related Product</h3>
-                                <div class="row">
-
-                                    <!--single Product -->
-                                    <div class="col-xl-4 col-md-6 col-md-4 mb-30">
-                                        <div class="product">
-                                            <div class="product-img-wrap">
-                                                <img src="${path}/assets/img/product/product26.png" alt="img">
-                                                <!-- Button trigger modal -->
-                                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view">Quick View</button>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-content">
-                                                    <p><a href="shop-details.jsp">Chashi Aromatic Chinigura Rice (1 Bag 5 kg)</a></p>
-                                                </div>
-                                                <div class="product-action">
-                                                    <a href="#" class="add-to-btn small-btn">
-                                                        <i class="flaticon-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                        <h5 class="product-price">$120.00</h5>
-                                                    </a>
-                                                    <div class="add-wishlist">
-                                                        <i class="fa fa-heart-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--single Product -->
-                                    <div class="col-xl-4 col-md-6 col-md-4 mb-30">
-                                        <div class="product">
-                                            <div class="product-img-wrap">
-                                                <img src="${path}/assets/img/product/product27.png" alt="img">
-                                                <!-- Button trigger modal -->
-                                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view">Quick View</button>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-content">
-                                                    <p><a href="shop-details.jsp">Chashi Aromatic Chinigura Rice (1 Bag 5 kg)</a></p>
-                                                </div>
-                                                <div class="product-action">
-                                                    <a href="#" class="add-to-btn small-btn">
-                                                        <i class="flaticon-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                        <h5 class="product-price">$120.00</h5>
-                                                    </a>
-                                                    <div class="add-wishlist">
-                                                        <i class="fa fa-heart-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--single Product -->
-                                    <div class="col-xl-4 col-md-6 col-md-4 mb-30">
-                                        <div class="product">
-                                            <div class="product-img-wrap">
-                                                <img src="${path}/assets/img/product/product28.png" alt="img">
-                                                <!-- Button trigger modal -->
-                                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view">Quick View</button>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-content">
-                                                    <p><a href="shop-details.jsp">Chashi Aromatic Chinigura Rice (1 Bag 5 kg)</a></p>
-                                                </div>
-                                                <div class="product-action">
-                                                    <a href="#" class="add-to-btn small-btn">
-                                                        <i class="flaticon-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                        <h5 class="product-price">$120.00</h5>
-                                                    </a>
-                                                    <div class="add-wishlist">
-                                                        <i class="fa fa-heart-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--single Product -->
-                                    <div class="col-xl-4 col-md-6 col-md-4 mb-30">
-                                        <div class="product">
-                                            <div class="product-img-wrap">
-                                                <img src="${path}/assets/img/product/product29.png" alt="img">
-                                                <!-- Button trigger modal -->
-                                                <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view">Quick View</button>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-content">
-                                                    <p><a href="shop-details.jsp">Chashi Aromatic Chinigura Rice (1 Bag 5 kg)</a></p>
-                                                </div>
-                                                <div class="product-action">
-                                                    <a href="#" class="add-to-btn small-btn">
-                                                        <i class="flaticon-shopping-cart"></i>
-                                                        <span>Add to Cart</span>
-                                                        <h5 class="product-price">$120.00</h5>
-                                                    </a>
-                                                    <div class="add-wishlist">
-                                                        <i class="fa fa-heart-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                   
-                                    <!--==================================== Start product-quick-view //product-modal  ================-->
-                                    <div class="modal product-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body p-35 pt-0">
-
-
-                                                    <div class="product-quick-view">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="product-preview-wrap">
-                                                                        <div class="tab-content bg-white p-50 b1 br-5">
-                                                                            <div class="tab-pane" id="preview_1">
-                                                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
-                                                                            </div>
-                                                                            <div class="tab-pane active" id="preview_2">
-                                                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
-                                                                            </div>
-                                                                            <div class="tab-pane" id="preview_3">
-                                                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
-                                                                            </div>
-                                                                            <div class="tab-pane" id="preview_4">
-                                                                                <img src="${path}/assets/img/product/product23.png" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <ul class="nav nav-tabs flex-nowrap align-content-between mt-30">
-                                                                            <li>
-                                                                                <a data-toggle="tab" href="#preview_1">
-                                                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a class="active" data-toggle="tab" href="#preview_2">
-                                                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a data-toggle="tab" href="#preview_3">
-                                                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a data-toggle="tab" href="#preview_4">
-                                                                                    <img src="${path}/assets/img/product/product23.png" alt="Product Thumbnail Image" />
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="product-details text-left bg-white ml-25 px-50 py-45 b1 br-5">
-                                                                        <h3 class="mb-25 rmt-25">Fresh Onion 1kg</h3>
-                                                                        <div class="rating mb-25">
-                                                                            <div class="star mr-15">
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                                <i class="fa fa-star"></i>
-                                                                            </div>
-                                                                            <div class="text">(13 Review)</div>
-                                                                        </div>
-                                                                        <p>Sed egestas, ante et vulputate volutpat, eropede semper est, vitluctus metus libero eu augue. Morbi purus libero, faucibus adipiscing.</p>
-                                                                        <p>commodo quis, gravida id, est. Sed lectus. Praest elemhendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat.lacus a ultrices.</p>
-
-                                                                        <h6>Availability: <span>In Stock</span></h6>
-                                                                        <h4 class="price">$120.00</h4>
-
-                                                                        <div class="product-spinner mt-20">
-                                                                            <div class="number-input b1">
-                                                                              <button class="minus"></button>
-                                                                              <input min="1" name="quantity" value="2" type="number">
-                                                                              <button class="plus"></button>
-                                                                            </div>
-                                                                            <a href="#" class="theme-btn br-30 ml-20">Add to Cart</a>
-                                                                            <div class="add-wishlist">
-                                                                                <i class="fa fa-heart-o"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--==================================== end product-quick-view //product-modal  ================-->
-                               
-                               
                                 </div>
                             </div>
 
@@ -610,6 +257,9 @@
 
     <!-- Custom script -->
     <script src="${path}/assets/js/script.js"></script>
+    <script >
+        !function(e){var a,p='<svg><symbol id="icon-xigua" viewBox="0 0 1024 1024"><path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#25467A" ></path><path d="M512 512m-460.8 0a460.8 460.8 0 1 0 921.6 0 460.8 460.8 0 1 0-921.6 0Z" fill="#57D785" ></path><path d="M972.8 512a458.285714 458.285714 0 0 1-155.52 345.142857 453.302857 453.302857 0 0 1-122.285714 77.828572 415.645714 415.645714 0 0 1-47.611429 17.531428 452.137143 452.137143 0 0 1-107.52 19.428572c-9.222857 0.64-18.56 0.891429-27.908571 0.891428-12.925714 0-25.851429-0.514286-38.525715-1.531428a457.84 457.84 0 0 1-96.902857-18.822858 415.645714 415.645714 0 0 1-47.611428-17.531428 453.302857 453.302857 0 0 1-122.285715-77.828572A458.285714 458.285714 0 0 1 51.2 512c0-154.114286 75.771429-290.685714 192-374.4l28.285714-18.811429a466.034286 466.034286 0 0 1 92.571429-43.428571c15.097143-4.994286 30.457143-9.348571 46.205714-12.925714a461.097143 461.097143 0 0 1 70.914286-10.285715c10.285714-0.64 20.48-1.028571 30.857143-1.028571 12.571429 0 25.142857 0.514286 37.371428 1.531429A445.84 445.84 0 0 1 613.714286 62.468571c15.748571 3.577143 31.108571 7.931429 46.205714 12.925715a466.034286 466.034286 0 0 1 92.571429 43.428571l28.308571 18.777143c116.228571 83.714286 192 220.285714 192 374.4z" fill="#57D785" ></path><path d="M556.034286 911.234286l-35.428572 36.731428 19.337143 23.942857c-9.222857 0.64-18.56 0.891429-27.908571 0.891429-12.925714 0-25.851429-0.514286-38.525715-1.531429l-7.04-8.708571a25.577143 25.577143 0 0 1 1.531429-33.794286l35.428571-36.731428-36.868571-45.314286a25.565714 25.565714 0 0 1 1.28-33.794286l35.588571-37.245714-36.742857-44.8a25.28 25.28 0 0 1 1.142857-33.794286l35.588572-37.714285-36.742857-44.285715a25.565714 25.565714 0 0 1 1.028571-33.794285l35.714286-38.137143-36.571429-43.782857a25.714286 25.714286 0 0 1 0.777143-33.92l35.84-38.651429-36.571428-43.268571a25.554286 25.554286 0 0 1 0.777142-33.794286l35.76-39.337143-36.48-42.754286a25.565714 25.565714 0 0 1 0.502858-33.794285l35.977142-39.68-36.48-42.365715a25.702857 25.702857 0 0 1 0.377143-33.794285L503.428571 77.828571 481.142857 52.228571c10.285714-0.64 20.48-1.028571 30.857143-1.028571 12.571429 0 25.142857 0.514286 37.371429 1.531429l7.554285 8.582857a25.725714 25.725714 0 0 1-0.251428 33.92l-36.228572 40.194285 36.571429 42.491429a25.565714 25.565714 0 0 1-0.502857 33.794286l-36.102857 39.805714 36.571428 42.88a25.428571 25.428571 0 0 1-0.64 33.92l-35.965714 39.291429 36.742857 43.428571a25.725714 25.725714 0 0 1-0.777143 33.92l-35.965714 38.788571 36.742857 43.897143a25.588571 25.588571 0 0 1-0.902857 33.92l-35.84 38.274286 36.868571 44.285714a25.588571 25.588571 0 0 1-1.142857 33.92l-35.714286 37.714286 36.868572 44.937143a25.451429 25.451429 0 0 1-1.142857 33.92l-35.542857 37.257143 36.868571 45.44a25.6 25.6 0 0 1-1.405714 33.92zM372.091429 911.108571c9.737143 15.737143 14.342857 31.485714 10.502857 35.428572-2.285714 2.285714-4.228571 4.228571-6.022857 5.885714a415.645714 415.645714 0 0 1-47.611429-17.531428c-0.388571-0.514286-0.891429-1.142857-1.28-1.794286-10.285714-15.108571-14.331429-27.268571-9.988571-29.44a80.365714 80.365714 0 0 0 16.777142-11.005714c-17.28-27.005714-25.474286-40-41.348571-64.765715-8.708571-13.714286-11.645714-26.377143-7.04-30.594285a172.571429 172.571429 0 0 0 18.285714-19.588572c-14.468571-24-21.382857-35.577143-34.822857-57.474286-7.417143-12.16-8.96-25.142857-3.965714-31.36 8.32-10.285714 12.411429-15.862857 20.868571-28.022857-12.16-20.971429-17.874286-30.96-29.165714-49.52-6.4-10.491429-6.651429-23.68-0.891429-32 9.462857-13.44 14.205714-20.731429 24.182858-36.217143-10.102857-17.794286-15.097143-26.114286-24.571429-41.474285-5.371429-8.582857-4.354286-21.885714 2.285714-32.125715 11.005714-16.64 16.64-25.474286 28.285715-44.297142-8.445714-14.331429-12.571429-20.857143-20.571429-32.891429-4.571429-6.788571-2.434286-19.965714 5.371429-31.874286 12.914286-19.874286 19.577143-30.16 33.394285-52.091428a234.594286 234.594286 0 0 0-17.794285-24.068572c-3.965714-4.857143-0.377143-17.794286 8.708571-31.485714 15.108571-22.788571 22.857143-34.685714 39.291429-59.428571-6.262857-7.165714-9.337143-10.285714-15.737143-15.234286-3.714286-2.811429 1.142857-15.485714 11.771428-30.582857 17.794286-25.6 27.005714-38.788571 46.205715-66.182857a40.285714 40.285714 0 0 0-13.177143-5.942858c15.097143-4.994286 30.457143-9.348571 46.205714-12.925714-15.874286 23.68-25.085714 37.371429-41.348571 61.44a122.034286 122.034286 0 0 1 14.08 18.045714c3.2 4.857143-2.045714 21.12-11.897143 36.571429-16.388571 25.851429-24.32 38.274286-39.554286 62.205714a310.24 310.24 0 0 1 16.514286 27.142857c3.84 6.857143 0.251429 23.542857-8.194286 37.371429-13.828571 22.914286-20.354286 33.92-33.28 54.914286 7.725714 13.177143 11.645714 20.377143 19.714286 35.965714 4.571429 8.96 2.685714 25.725714-4.354286 37.714286-11.52 19.84-17.142857 29.314286-27.908571 47.108571 9.222857 16.64 13.954286 25.6 23.817142 44.662857 5.622857 10.754286 5.371429 27.52-0.64 37.714286C307.588571 579.965714 302.857143 587.771429 293.714286 602.285714c11.131429 20.091429 16.891429 30.72 28.925714 53.12 6.788571 12.571429 8.194286 29.188571 3.074286 37.371429-8.068571 13.188571-12.034286 19.337143-19.84 30.468571 13.314286 23.165714 20.354286 35.428571 34.811428 61.051429 8.194286 14.217143 11.142857 30.468571 6.788572 36.48-6.914286 9.737143-10.285714 14.217143-17.142857 21.897143 16.034286 26.194286 24.354286 39.885714 41.76 68.434285zM271.485714 118.788571v0.251429c-0.891429 4.48-10.285714 20.731429-21.12 36.731429-18.045714 26.628571-26.491429 39.554286-42.365714 64.514285 0 9.6 0 15.108571 0.251429 27.52 0.137143 7.165714-6.137143 24.582857-14.205715 39.302857-13.314286 24.32-19.428571 35.965714-31.097143 58.365715 2.045714 14.08 3.2 21.714286 6.011429 38.525714 1.668571 9.6-1.531429 27.52-7.291429 40.708571-9.222857 21.371429-13.44 31.611429-21.508571 50.811429 4.868571 18.171429 7.554286 27.908571 13.565714 48.64 3.325714 11.645714 3.2 29.828571-0.377143 40.96-5.897143 18.045714-8.582857 26.491429-13.577142 42.285714 8.194286 21.714286 12.674286 33.142857 22.537142 57.474286 5.497143 13.565714 8.445714 31.36 6.525715 40.194286-3.074286 14.205714-4.48 20.571429-7.165715 32.502857 12.285714 24.834286 18.937143 37.897143 33.28 65.028571 8 15.108571 13.942857 32.125714 13.302858 38.4-0.765714 7.165714-1.142857 11.428571-1.531429 16.125715a460.914286 460.914286 0 0 1-38.148571-37.714286 9.611429 9.611429 0 0 1-0.251429-4.091429c1.794286-6.914286 2.685714-10.88 4.48-19.965714-14.331429-25.474286-20.868571-37.714286-33.142857-61.062857-6.914286-12.925714-10.114286-26.754286-8.057143-33.531429 3.325714-10.88 4.982857-16.902857 8.822857-30.08C130.285714 647.931429 125.714286 637.314286 117.245714 617.142857c-4.731429-11.428571-5.714286-25.725714-2.285714-34.685714 5.497143-14.72 8.32-22.525714 14.72-39.428572-6.537143-19.325714-9.348571-28.285714-14.72-44.925714-3.074286-9.474286-1.542857-23.805714 3.428571-34.811428 8.32-18.182857 12.8-27.782857 22.274286-47.874286-3.428571-15.485714-4.994286-22.525714-7.805714-35.2-1.668571-7.291429 2.171429-21.371429 9.211428-34.171429 11.771429-21.12 18.045714-32.137143 31.36-55.177143-1.142857-11.257143-1.668571-16.125714-2.685714-24.697142-0.514286-4.868571 5.714286-18.182857 15.234286-32.388572 15.737143-23.68 24.182857-35.84 41.977143-61.177143 0.514286-6.788571 0.765714-9.474286 1.028571-13.577143 0.125714-1.92 5.714286-10.285714 14.205714-21.371428zM766.72 611.325714c-11.268571 18.56-17.028571 28.571429-29.188571 49.542857 8.457143 12.16 12.571429 17.782857 20.868571 28.022858 4.994286 6.274286 3.428571 19.2-3.965714 31.36-13.44 21.897143-20.354286 33.417143-34.822857 57.474285a172.571429 172.571429 0 0 0 18.285714 19.588572c4.571429 4.217143 1.668571 16.891429-7.04 30.594285-15.874286 24.822857-24.068571 37.714286-41.348572 64.765715a80.365714 80.365714 0 0 0 16.777143 11.005714c4.342857 2.171429 0.251429 14.331429-9.988571 29.44-0.388571 0.64-0.891429 1.28-1.28 1.794286a415.645714 415.645714 0 0 1-47.611429 17.531428c-1.794286-1.657143-3.714286-3.577143-6.022857-5.885714-3.84-3.965714 0.765714-19.714286 10.502857-35.428571 17.405714-28.571429 25.725714-42.285714 41.725715-68.48-6.857143-7.68-10.285714-12.16-17.142858-21.897143-4.354286-6.011429-1.405714-22.262857 6.788572-36.48 14.457143-25.6 21.497143-37.885714 34.811428-61.051429-7.805714-11.131429-11.771429-17.28-19.84-30.468571-5.12-8.182857-3.714286-24.822857 3.074286-37.371429 12.034286-22.4 17.794286-33.028571 28.925714-53.12-9.142857-14.468571-13.828571-22.274286-23.428571-38.788571-6.011429-10.285714-6.262857-27.005714-0.64-37.714286 9.862857-19.062857 14.594286-28.022857 23.817143-44.662857-10.754286-17.794286-16.388571-27.268571-27.908572-47.108572-7.04-12.034286-8.96-28.8-4.354285-37.714285 8.08-15.702857 12-22.902857 19.725714-36.08-12.925714-20.994286-19.428571-32-33.28-54.914286-8.445714-13.828571-12.034286-30.468571-8.194286-37.371429a310.24 310.24 0 0 1 16.514286-27.142857c-15.234286-23.931429-23.165714-36.354286-39.554286-62.205714-9.851429-15.485714-15.097143-31.748571-11.897143-36.571429a122.034286 122.034286 0 0 1 14.08-18.045714c-16.262857-24.068571-25.474286-37.714286-41.348571-61.44 15.748571 3.577143 31.108571 7.931429 46.205714 12.925714a40.285714 40.285714 0 0 0-13.177143 6.011429c19.2 27.428571 28.411429 40.582857 46.205715 66.182857 10.617143 15.097143 15.485714 27.771429 11.771428 30.582857-6.4 4.994286-9.474286 8.068571-15.737143 15.234286 16.377143 24.708571 24.182857 36.571429 39.291429 59.428571 9.142857 13.714286 12.674286 26.628571 8.708571 31.485715a234.594286 234.594286 0 0 0-17.794285 24.068571c13.817143 21.862857 20.48 32.148571 33.405714 52.022857 7.805714 11.908571 9.988571 25.085714 5.371429 31.874286-8 12.034286-12.16 18.56-20.571429 32.891429 11.645714 18.822857 17.28 27.657143 28.285714 44.297142 6.662857 10.285714 7.68 23.542857 2.285715 32.125715-9.474286 15.36-14.468571 23.68-24.571429 41.474285 9.977143 15.485714 14.72 22.777143 24.182857 36.217143 5.748571 8.32 5.497143 21.508571-0.902857 32zM906.754286 617.142857c-8.445714 20.228571-13.062857 30.857143-23.165715 53.508572 3.84 13.177143 5.497143 19.2 8.822858 30.08 2.057143 6.777143-1.142857 20.571429-8.057143 33.531428-12.285714 23.302857-18.822857 35.588571-33.142857 61.062857 1.794286 9.085714 2.685714 13.051429 4.48 19.965715a9.611429 9.611429 0 0 1-0.251429 4.091428 460.914286 460.914286 0 0 1-38.148571 37.714286c-0.388571-4.731429-0.765714-8.96-1.531429-16.125714-0.64-6.274286 5.245714-23.291429 13.302857-38.4 14.342857-27.131429 20.994286-40.194286 33.28-65.028572-2.685714-11.897143-4.091429-18.285714-7.165714-32.502857-1.92-8.834286 1.028571-26.628571 6.525714-40.194286 9.862857-24.32 14.342857-35.714286 22.537143-57.474285-4.994286-15.748571-7.68-24.194286-13.577143-42.285715-3.577143-11.131429-3.702857-29.314286-0.377143-40.96 6.011429-20.731429 8.697143-30.468571 13.565715-48.64-8.068571-19.2-12.285714-29.44-21.508572-50.811428-5.714286-13.188571-8.96-31.108571-7.291428-40.708572 2.811429-16.765714 3.965714-24.445714 6.011428-38.525714-11.645714-22.4-17.782857-34.045714-31.097143-58.365714-8.068571-14.72-14.342857-32.137143-14.205714-39.302857 0.251429-12.411429 0.251429-17.92 0.251429-27.52-15.874286-24.96-24.32-37.885714-42.365715-64.514286-10.88-16-20.228571-32.251429-21.12-36.731429v-0.251428l28.274286 18.845714c8.445714 11.131429 14.08 19.428571 14.205714 21.371429 0.262857 4.102857 0.514286 6.788571 1.028572 13.577142 17.794286 25.337143 26.285714 37.497143 41.977143 61.177143 9.474286 14.205714 15.748571 27.52 15.234285 32.388572-1.017143 8.571429-1.531429 13.44-2.685714 24.697143 13.314286 23.04 19.588571 34.057143 31.36 55.177142 7.04 12.8 10.88 26.88 9.211429 34.171429-2.811429 12.674286-4.342857 19.714286-7.805715 35.2 9.474286 20.091429 13.954286 29.714286 22.274286 47.874286 4.994286 11.005714 6.525714 25.337143 3.428571 34.811428-5.371429 16.64-8.182857 25.6-14.72 44.925715 6.4 16.902857 9.222857 24.708571 14.72 39.428571 3.485714 8.96 2.457143 23.314286-2.274285 34.742857z" fill="#00AA5E" ></path><path d="M512 550.4a64.068571 64.068571 0 0 1-64-64 12.8 12.8 0 1 1 25.6 0 38.4 38.4 0 0 0 76.8 0 12.8 12.8 0 1 1 25.6 0 64.068571 64.068571 0 0 1-64 64z" fill="#25467A" ></path><path d="M384 384m-38.4 0a38.4 38.4 0 1 0 76.8 0 38.4 38.4 0 1 0-76.8 0Z" fill="#25467A" ></path><path d="M640 384m-38.4 0a38.4 38.4 0 1 0 76.8 0 38.4 38.4 0 1 0-76.8 0Z" fill="#25467A" ></path><path d="M332.8 448h-51.2a25.6 25.6 0 1 0 0 51.2h51.2a25.6 25.6 0 1 0 0-51.2zM742.4 448h-51.2a25.6 25.6 0 1 0 0 51.2h51.2a25.6 25.6 0 0 0 0-51.2z" fill="#CEF3D1" ></path></symbol><symbol id="icon-xiangjiao" viewBox="0 0 1250 1024"><path d="M1027.510302 58.750864S732.639982 476.019659 204.112505 264.586389c0 0-118.221053-47.34412 0 122.398475 0 0 389.447162 439.520531 904.063823-164.117z" fill="#FED930" ></path><path d="M542.957157 599.908082c-227.279626 0-368.351179-156.235596-374.283118-162.919472l-1.796292-2.297583c-54.86348-78.730487-69.038867-123.930197-47.469443-151.083442 22.822651-28.740666 68.426178-12.448719 77.296239-8.883985 504.381976 201.755575 790.827827-193.038687 793.710248-197.049012l24.284749-34.408036 106.52427 216.696823-10.680276 12.532267c-183.653412 215.415746-373.029892 325.574374-562.83804 327.398515zM207.008851 404.71106c11.668933 12.532267 140.44494 145.123653 336.073629 145.123652h4.84581c170.870499-1.90769 343.676538-101.929106 513.822951-297.348923l-56.283804-114.503147C920.707537 233.33927 630.223511 502.142474 178.128938 321.218311a70.027524 70.027524 0 0 0-17.893293-4.177422c1.517797 9.287802 9.385276 33.781422 46.773206 87.670171z" fill="" ></path><path d="M996.541678 109.395148S843.021406 799.547096 108.310285 614.097393c0 0-175.451739-51.521542-16.445119 149.356774s537.327914 267.828472 833.395761 51.521543c0 0 274.150305-133.914236 230.28737-618.049639z" fill="#FED930" ></path><path d="M529.269137 1024a655.409719 655.409719 0 0 1-88.422107-6.001563C288.03692 997.222723 153.872039 922.725357 72.746496 813.62501 4.76591 722.195159-14.450233 665.786032 10.419355 630.723534c27.946956-39.393093 93.727433-21.290929 106.579969-17.266679 213.716928 57.383859 398.400771 39.991857 548.022115-51.967134C916.989631 406.618749 985.666455 90.19293 986.306993 87.018089L993.450385 52.930322l202.549286 118.750193 1.086129 12.92216c43.84901 514.992629-216.056285 674.723335-244.852649 690.764637-125.768263 97.278242-273.231272 148.618763-422.964014 148.632688zM67.914611 655.996939c-8.661189 0-14.969097 1.392474-16.709689 3.717906-0.153172 0.208871-12.796837 23.880931 61.686603 124.041595 73.118816 98.364372 195.099549 165.70442 334.639381 184.642068 166.595604 22.725178 335.46094-24.855663 475.529912-133.802838l3.815379-2.464679c2.520378-1.392474 258.164702-142.85392 221.305912-630.414809l-121.284496-71.127578c-25.31518 89.731032-112.651156 336.477447-335.586263 473.580449C529.408384 703.633479 331.509962 722.93317 103.046733 661.538986a125.239122 125.239122 0 0 0-35.132122-5.542047z" fill="" ></path><path d="M1154.100124 173.295785L1008.79545 85.973733c-17.698346-10.638502-23.477114-0.445592-12.838612-18.102163L1010.730989 43.183004a37.596801 37.596801 0 0 1 51.521542-12.838612L1207.557206 84.330614a37.596801 37.596801 0 0 1 12.838611 51.521542l-14.77415 24.591093a37.596801 37.596801 0 0 1-51.521543 12.852536z" fill="#967A59" ></path><path d="M1173.344117 203.693496a62.257518 62.257518 0 0 1-32.138303-8.911835L995.915064 107.417835a20.720015 20.720015 0 0 0-7.059844-2.784948c-3.912852-0.891183-15.804581-3.620433-21.151681-16.222324-5.569896-13.019633 0.501291-23.101146 6.377531-32.820615l15.191893-25.315179a62.661335 62.661335 0 0 1 83.618071-22.627705l147.602256 55.239448a62.661335 62.661335 0 0 1 21.388403 85.901729l-14.788075 24.577168a62.563862 62.563862 0 0 1-53.749501 30.328087zM1166.994435 151.795985a12.685439 12.685439 0 0 0 17.155281-4.177422L1198.923866 122.971771a12.741138 12.741138 0 0 0-2.896346-16.222324L1049.358221 51.844193a12.62974 12.62974 0 0 0-17.183131 4.302745L1025.71401 66.855064z" fill="" ></path><path d="M517.279935 524.268888a295.524783 295.524783 0 0 1-40.813417-2.784949 16.709689 16.709689 0 1 1 4.623014-33.057335c35.382767 4.943283 74.455591 2.395055 116.104492-7.616834a16.709689 16.709689 0 0 1 7.797856 32.472497 376.984519 376.984519 0 0 1-87.711945 10.986621zM404.768026 497.853653a16.709689 16.709689 0 0 1-8.159899-2.130485A120.852829 120.852829 0 0 1 375.971661 481.603481 16.709689 16.709689 0 0 1 398.251247 456.747817a95.537649 95.537649 0 0 0 14.718451 9.747319 16.709689 16.709689 0 0 1-8.201672 31.24712zM835.669142 591.567162a16.709689 16.709689 0 0 1-10.972696-29.241957c54.459663-47.497292 92.529905-100.954374 114.89304-137.45112a16.709689 16.709689 0 1 1 28.462171 17.433776c-23.574587 38.487985-63.775315 94.897111-121.409819 145.179352a16.709689 16.709689 0 0 1-10.972696 4.079949z" fill="#FFFFFF" ></path><path d="M536.259357 740.311247m-31.149646 0a31.149646 31.149646 0 1 0 62.299292 0 31.149646 31.149646 0 1 0-62.299292 0Z" fill="" ></path><path d="M711.279429 740.311247m-31.149646 0a31.149646 31.149646 0 1 0 62.299292 0 31.149646 31.149646 0 1 0-62.299292 0Z" fill="" ></path><path d="M623.832054 882.023339c23.504963 0 42.554009-22.279586 42.55401-49.78095h-85.177642c0 27.501364 19.049046 49.78095 42.623632 49.78095z" fill="" ></path><path d="M601.190425 863.64268a22.58593 15.372914 0 1 0 45.171861 0 22.58593 15.372914 0 1 0-45.171861 0Z" fill="#E59B5E" ></path><path d="M470.339632 844.691107a17.392002 12.448719 0 1 0 34.784004 0 17.392002 12.448719 0 1 0-34.784004 0Z" fill="#FF00FF" ></path><path d="M742.415151 844.691107a17.392002 12.448719 0 1 0 34.784003 0 17.392002 12.448719 0 1 0-34.784003 0Z" fill="#FF00FF" ></path></symbol><symbol id="icon-pear" viewBox="0 0 1024 1024"><path d="M488.727273 209.454545V186.181818c0-41.890909 16.290909-86.109091 46.545454-116.363636 30.254545-30.254545 69.818182-46.545455 111.709091-46.545455H674.909091v23.272728c0 41.890909-16.290909 83.781818-46.545455 116.363636-30.254545 30.254545-72.145455 46.545455-114.036363 46.545454H488.727273z" fill="#90C962" ></path><path d="M514.327273 162.909091c34.909091 0 69.818182-13.963636 97.745454-39.563636 20.945455-20.945455 34.909091-46.545455 39.563637-74.472728h2.327272c0 37.236364-13.963636 72.145455-39.563636 100.072728C584.145455 172.218182 549.236364 186.181818 512 186.181818c0-6.981818 0-16.290909 2.327273-23.272727z" fill="#71B956" ></path><path d="M498.036364 1000.727273C344.436364 1000.727273 214.109091 879.709091 209.454545 730.763636c-2.327273-65.163636 16.290909-125.672727 55.854546-176.872727 37.236364-51.2 58.181818-114.036364 60.509091-186.181818v-2.327273C330.472727 279.272727 404.945455 209.454545 495.709091 209.454545h34.909091c88.436364 0 165.236364 69.818182 169.890909 155.927273v2.327273c2.327273 72.145455 23.272727 134.981818 60.509091 186.181818 39.563636 51.2 58.181818 111.709091 55.854545 176.872727-6.981818 148.945455-137.309091 269.963636-290.909091 269.963637h-27.927272z" fill="#FFCB5B" ></path><path d="M525.963636 1024h-30.254545C330.472727 1024 190.836364 893.672727 186.181818 730.763636c-2.327273-69.818182 18.618182-134.981818 60.509091-190.836363 34.909091-46.545455 53.527273-107.054545 55.854546-172.218182v-2.327273c4.654545-97.745455 90.763636-176.872727 193.163636-176.872727h34.909091c102.4 0 188.509091 79.127273 193.163636 179.2v2.327273c2.327273 67.490909 20.945455 125.672727 55.854546 172.218181 41.890909 55.854545 62.836364 121.018182 60.509091 190.836364-6.981818 160.581818-146.618182 290.909091-314.181819 290.909091z m-30.254545-791.272727c-76.8 0-141.963636 60.509091-146.618182 132.654545v2.327273c-2.327273 76.8-25.6 144.290909-65.163636 200.145454-34.909091 46.545455-53.527273 102.4-51.2 162.909091 4.654545 134.981818 123.345455 246.690909 265.309091 246.690909h30.254545c141.963636 0 260.654545-111.709091 262.981818-246.690909 2.327273-58.181818-16.290909-114.036364-51.2-162.909091-41.890909-53.527273-62.836364-123.345455-65.163636-200.145454v-2.327273c-2.327273-74.472727-67.490909-132.654545-146.618182-132.654545h-32.581818z" fill="#014463" ></path><path d="M740.072727 567.854545c-41.890909-53.527273-62.836364-123.345455-65.163636-200.145454v-2.327273c-2.327273-60.509091-46.545455-111.709091-104.727273-128 32.581818 25.6 55.854545 62.836364 58.181818 104.727273v2.327273c2.327273 76.8 11.636364 132.654545 51.2 186.181818 34.909091 46.545455 53.527273 102.4 51.2 162.909091-4.654545 134.981818-109.381818 260.654545-251.345454 260.654545h-30.254546c-34.909091 0-65.163636-6.981818-95.418181-18.618182 41.890909 25.6 90.763636 41.890909 141.963636 41.890909h30.254545c141.963636 0 260.654545-111.709091 262.981819-246.690909 4.654545-60.509091-13.963636-116.363636-48.872728-162.909091z" fill="#F6B545" ></path><path d="M311.854545 674.909091h-6.981818c-11.636364-2.327273-20.945455-16.290909-16.290909-27.927273 9.309091-37.236364 27.927273-74.472727 51.2-104.727273 13.963636-18.618182 25.6-37.236364 32.581818-60.50909 4.654545-11.636364 18.618182-18.618182 30.254546-13.963637 11.636364 4.654545 18.618182 18.618182 13.963636 30.254546-9.309091 25.6-23.272727 48.872727-39.563636 69.818181-20.945455 27.927273-34.909091 55.854545-41.890909 88.436364-4.654545 11.636364-13.963636 18.618182-23.272728 18.618182z" fill="#FFE27A" ></path><path d="M302.545455 721.454545m-23.272728 0a23.272727 23.272727 0 1 0 46.545455 0 23.272727 23.272727 0 1 0-46.545455 0Z" fill="#FFE27A" ></path><path d="M302.545455 395.636364v-23.272728c0-41.890909 16.290909-86.109091 46.545454-116.363636 30.254545-30.254545 69.818182-46.545455 111.709091-46.545455H488.727273v23.272728c0 41.890909-16.290909 83.781818-46.545455 116.363636-30.254545 30.254545-72.145455 46.545455-114.036363 46.545455H302.545455z" fill="#90C962" ></path><path d="M695.854545 20.945455c-2.327273-9.309091-9.309091-18.618182-18.618181-18.618182-55.854545-9.309091-116.363636 11.636364-155.927273 51.2-16.290909 16.290909-30.254545 37.236364-39.563636 58.181818C451.490909 72.145455 402.618182 46.545455 349.090909 46.545455c-13.963636 0-23.272727 9.309091-23.272727 23.272727s9.309091 23.272727 23.272727 23.272727c55.854545 0 102.4 39.563636 114.036364 93.090909-48.872727 0-95.418182 18.618182-130.327273 53.527273-41.890909 41.890909-60.509091 100.072727-51.2 155.927273 2.327273 9.309091 9.309091 18.618182 18.618182 18.618181 9.309091 2.327273 18.618182 2.327273 27.927273 2.327273 48.872727 0 95.418182-18.618182 130.327272-53.527273 34.909091-34.909091 55.854545-83.781818 53.527273-132.654545h2.327273c48.872727 0 95.418182-18.618182 130.327272-53.527273 41.890909-39.563636 60.509091-97.745455 51.2-155.927272zM425.890909 332.8C397.963636 358.4 363.054545 372.363636 325.818182 372.363636c0-37.236364 13.963636-72.145455 39.563636-100.072727S428.218182 232.727273 465.454545 232.727273c0 37.236364-13.963636 72.145455-39.563636 100.072727z m186.181818-186.181818C584.145455 172.218182 549.236364 186.181818 512 186.181818c0-37.236364 13.963636-72.145455 39.563636-100.072727C579.490909 60.509091 614.4 46.545455 649.309091 46.545455h2.327273c0 37.236364-13.963636 72.145455-39.563637 100.072727z" fill="#014463" ></path><path d="M328.145455 349.090909c34.909091 0 69.818182-13.963636 97.745454-39.563636 20.945455-20.945455 34.909091-46.545455 39.563636-74.472728h2.327273c0 37.236364-13.963636 72.145455-39.563636 100.072728-30.254545 23.272727-65.163636 37.236364-102.4 37.236363 0-6.981818 0-16.290909 2.327273-23.272727z" fill="#71B956" ></path></symbol><symbol id="icon-chengzi1" viewBox="0 0 1024 1024"><path d="M512 0a38.4 38.4 0 0 0-38.4 38.4V192h76.8V38.4A38.4 38.4 0 0 0 512 0z" fill="#25467A" ></path><path d="M512 1024C215.325714 1024 0 824.822857 0 550.4 0 270.48 224.902857 51.2 512 51.2s512 219.28 512 499.2C1024 824.822857 808.674286 1024 512 1024z" fill="#25467A" ></path><path d="M972.8 550.4c0 254.468571-206.331429 422.4-460.8 422.4S51.2 804.868571 51.2 550.4c0-219.268571 153.142857-393.211429 358.4-437.12 12.674286-2.811429 25.6-5.12 38.651429-6.788571a498.674286 498.674286 0 0 1 127.497142 0c13.051429 1.668571 25.977143 3.977143 38.651429 6.788571 205.314286 43.908571 358.4 217.851429 358.4 437.12z" fill="#FFAA00" ></path><path d="M972.8 550.4c0 254.468571-206.331429 422.4-460.8 422.4-211.074286 0-388.994286-115.588571-443.52-300.16A516.171429 516.171429 0 0 0 416 806.4c262.651429 0 479.611429-195.2 513.668571-448.514286 27.645714 57.725714 43.131429 122.88 43.131429 192.514286z" fill="#F5AA00" ></path><path d="M230.4 640m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M179.2 716.8m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M281.6 716.8m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M806.4 640m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M755.2 716.8m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M857.6 716.8m-25.6 0a25.6 25.6 0 1 0 51.2 0 25.6 25.6 0 1 0-51.2 0Z" fill="#EAA014" ></path><path d="M512 550.4a64.068571 64.068571 0 0 1-64-64 12.8 12.8 0 1 1 25.6 0 38.4 38.4 0 0 0 76.8 0 12.8 12.8 0 1 1 25.6 0 64.068571 64.068571 0 0 1-64 64z" fill="#25467A" ></path><path d="M384 384m-38.4 0a38.4 38.4 0 1 0 76.8 0 38.4 38.4 0 1 0-76.8 0Z" fill="#25467A" ></path><path d="M640 384m-38.4 0a38.4 38.4 0 1 0 76.8 0 38.4 38.4 0 1 0-76.8 0Z" fill="#25467A" ></path><path d="M332.8 448h-51.2a25.6 25.6 0 1 0 0 51.2h51.2a25.6 25.6 0 1 0 0-51.2zM742.4 448h-51.2a25.6 25.6 0 1 0 0 51.2h51.2a25.6 25.6 0 0 0 0-51.2z" fill="#FFD191" ></path><path d="M614.4 113.28v1.92c0 42.365714-45.828571 76.8-102.4 76.8s-102.4-34.434286-102.4-76.8v-1.92c12.674286-2.811429 25.6-5.12 38.651429-6.788571a498.674286 498.674286 0 0 1 127.497142 0c13.051429 1.668571 25.977143 3.977143 38.651429 6.788571z" fill="#00AA5E" ></path></symbol><symbol id="icon-pingguo" viewBox="0 0 1024 1024"><path d="M512 0a38.4 38.4 0 0 0-38.4 38.4V191.999998h76.8V38.4A38.4 38.4 0 0 0 512 0z" fill="#25467A" ></path><path d="M624.78857 1023.999989c-36.845714 0-74.697142-7.874286-112.78857-23.44-38.091428 15.565714-75.931428 23.44-112.78857 23.44a256.37714 256.37714 0 0 1-39.131428-2.994286C254.308574 1004.639989 152.742861 919.99999 81.428576 788.857134c-107.257142-197.291426-93.359999-383.817139-44.571428-492.571423 8.194286-18.285714 84.399999-179.702855 234.091426-213.919998a208.822855 208.822855 0 0 1 46.982857-5.542857c28.971428 0 53.142857 6.651428 76.514285 13.085714 29.131428 8 62.159999 17.142857 117.577141 17.142857s88.445713-9.142857 117.577142-17.142857c23.371428-6.434286 47.542857-13.085714 76.571427-13.085714a208.994283 208.994283 0 0 1 46.971428 5.52C902.651424 116.571427 978.948566 277.954283 987.15428 296.251425c48.777142 108.78857 62.674285 295.314282-44.571428 492.571423C871.257139 919.99999 769.691426 1004.639989 663.919998 1021.005703a256.342854 256.342854 0 0 1-39.119999 2.994286z" fill="#25467A" ></path><path d="M940.44571 317.211425c-4.742857-10.594286-72.274285-156.06857-198.731427-184.959998-77.782856-17.782857-101.599999 25.931428-229.714283 25.931428s-151.885713-43.714285-229.714283-25.931428C155.828575 161.142855 88.308576 306.617139 83.55429 317.211425-24.251423 557.714279 154.388575 937.382847 367.908573 970.411418c55.942857 8.651428 106.479999-7.622857 144.091427-25.908571 37.611428 18.285714 88.14857 34.56 144.091427 25.908571C869.611425 937.382847 1048.251423 557.714279 940.44571 317.211425z" fill="#B4E876" ></path><path d="M656.125713 970.365703c-55.931428 8.708571-106.491427-7.554286-144.125713-25.851428-37.634285 18.285714-88.194285 34.56-144.125713 25.851428-99.714285-15.485714-191.874284-106.491427-250.754283-223.611426 85.245713 45.954285 185.348569 72.445713 292.479997 72.445714 280.571425 0 513.142851-181.714284 556.03428-419.714281 43.508571 236.285712-119.039999 541.439994-309.508568 570.879993z" fill="#AADB70" ></path><path d="M512 550.399994a64.068571 64.068571 0 0 1-63.999999-63.999999 12.8 12.8 0 1 1 25.599999 0 38.4 38.4 0 0 0 76.8 0 12.8 12.8 0 1 1 25.599999 0 64.068571 64.068571 0 0 1-63.999999 63.999999z" fill="#25467A" ></path><path d="M384.000001 383.999996m-38.399999 0a38.4 38.4 0 1 0 76.799999 0 38.4 38.4 0 1 0-76.799999 0Z" fill="#25467A" ></path><path d="M639.999999 383.999996m-38.4 0a38.4 38.4 0 1 0 76.799999 0 38.4 38.4 0 1 0-76.799999 0Z" fill="#25467A" ></path><path d="M332.800002 447.999995h-51.199999a25.6 25.6 0 1 0 0 51.199999h51.199999a25.6 25.6 0 1 0 0-51.199999zM742.399997 447.999995h-51.199999a25.6 25.6 0 1 0 0 51.199999h51.199999a25.6 25.6 0 0 0 0-51.199999z" fill="#D7F4BD" ></path></symbol></svg>',t=(a=document.getElementsByTagName("script"))[a.length-1].getAttribute("data-injectcss");if(t&&!e.__iconfont__svg__cssinject__){e.__iconfont__svg__cssinject__=!0;try{document.write("<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>")}catch(a){console&&console.log(a)}}!function(a){if(document.addEventListener)if(~["complete","loaded","interactive"].indexOf(document.readyState))setTimeout(a,0);else{var t=function(){document.removeEventListener("DOMContentLoaded",t,!1),a()};document.addEventListener("DOMContentLoaded",t,!1)}else document.attachEvent&&(h=a,c=e.document,i=!1,(p=function(){try{c.documentElement.doScroll("left")}catch(a){return void setTimeout(p,50)}l()})(),c.onreadystatechange=function(){"complete"==c.readyState&&(c.onreadystatechange=null,l())});function l(){i||(i=!0,h())}var h,c,i,p}(function(){var a,t,l,h,c,i;(a=document.createElement("div")).innerHTML=p,p=null,(t=a.getElementsByTagName("svg")[0])&&(t.setAttribute("aria-hidden","true"),t.style.position="absolute",t.style.width=0,t.style.height=0,t.style.overflow="hidden",l=t,(h=document.body).firstChild?(c=l,(i=h.firstChild).parentNode.insertBefore(c,i)):h.appendChild(l))})}(window);
+    </script>
 
 </body>
 

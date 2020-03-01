@@ -4,4 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.FruitMapper">
 
+    <select id="query" parameterType="map" resultType="fruit">
+        SELECT * FROM fruit WHERE status = 1
+        <if test="kid != null">
+            AND kid = #{kid}
+        </if>
+        <if test="name != null">
+            AND name LIKE CONCAT('%',#{name},'%') OR description LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="queryByFid" parameterType="int" resultType="fruit">
+        SELECT * FROM fruit WHERE fid = #{fid}
+    </select>
+
+    <update id="updateStockAndSales" parameterType="map">
+        UPDATE fruit SET stock = stock - #{quantity}, sales = sales + #{quantity} WHERE fid = #{fid}
+    </update>
+
 </mapper>

@@ -4,4 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.UserMapper">
 
+    <select id="query" parameterType="map" resultType="users">
+        SELECT * FROM users
+        <where>
+            <if test="uid != null">
+                AND uid = #{uid}
+            </if>
+            <if test="username">
+                AND username = #{username}
+            </if>
+        </where>
+    </select>
+
+    <insert id="createUser" parameterType="map">
+        INSERT INTO users (username, password, tel, email) VALUES (#{username}, #{password}, #{tel}, #{email})
+    </insert>
+
+    <update id="editPassword" parameterType="map">
+        UPDATE users SET password = #{password} WHERE uid = #{uid}
+    </update>
+
 </mapper>

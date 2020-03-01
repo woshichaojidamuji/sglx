@@ -18,6 +18,28 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("register").click(function () {
+                var data = $("#register-form").serialize();
+                $.ajax({
+                    url:"${path}/register",
+                    type:"post",
+                    data:data,
+                    success:function (res) {
+                        if (res.error){
+                            alert(res.error);
+                        } else {
+                            alert(res.register);
+                            location = "${path}/register";
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
 </head>
 
 <body>
@@ -70,24 +92,28 @@
                         <div class="login-information bg-white br-5 py-125">
                             <div class="login-info-inner">
                                 <h2>Sign Up</h2>
-                                <form action="#" class="login-form">
+                                <form id="register-form" action="${path}/register" method="post" class="login-form">
                                     <div class="text-field">
-                                        <label for="name">Full Name*</label>
-                                        <input type="text" id="name" placeholder="Jhon Mack">
+                                        <label for="username">用户名*</label>
+                                        <input type="text" id="username" placeholder="name">
                                     </div>
                                     <div class="email-field">
-                                        <label for="email">Enter Email*</label>
-                                        <input type="email" id="email" placeholder="Email Address">
+                                        <label for="email">电话号码*</label>
+                                        <input type="text" id="tel" placeholder="tel">
+                                    </div>
+                                    <div class="email-field">
+                                        <label for="email">邮箱*</label>
+                                        <input type="email" id="email" placeholder="Email">
                                     </div>
                                     <div class="password-field">
-                                        <label for="pass">Password*</label>
-                                        <input type="password" id="pass" placeholder="*********">
+                                        <label for="password">密码*</label>
+                                        <input type="password" id="password" placeholder="*********">
                                     </div>
                                     <div class="alternative-login">
-                                        Do You Have Account ?<a class="signup-link" href="#">Login</a>
+                                        已有账号 ?<a class="signup-link" href="${path}/login">去登陆</a>
                                     </div> 
                                     <div class="signin-button-wrap">
-                                        <button type="submit" class="btn-bg2">Sign Up</button>
+                                        <button id="register" type="submit" class="btn-bg2">注册</button>
                                     </div>
 
                                 </form>

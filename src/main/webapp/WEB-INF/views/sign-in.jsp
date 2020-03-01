@@ -18,6 +18,33 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#login").click(function () {
+                var data = $("#login-form").serialize();
+                $.ajax({
+                    url:"${path}/login",
+                    type:"post",
+                    data:data,
+                    success:function (res) {
+                        if (res.error) {
+                            alert(res.error.error);
+                        }
+                        if (res.success) {
+                            if (res.uri) {
+                                location = res.uri;
+                            } else {
+                                location = "${path}/index";
+                            }
+                        }
+                    }
+                });
+                return false;
+            })
+        })
+    </script>
+
 </head>
 
 <body>
@@ -66,21 +93,23 @@
                         <div class="login-information bg-white br-5">
                             <div class="login-info-inner">
                                 <h2>Welcome Back</h2>
-                                <form action="#" class="login-form">
+                                <form id="login-form" action="${path}/login" method="post" class="login-form">
+                                    <c:if test="${param.uri != null}">
+                                        <input type="hidden" name="uri" value="${param.uri}">
+                                    </c:if>
                                     <div class="email-field">
-                                        <label for="email">Enter Email*</label>
-                                        <input type="email" id="email" placeholder="Email Address">
+                                        <label for="username">用户名*</label>
+                                        <input type="text" id="username" placeholder="name">
                                     </div>
                                     <div class="password-field">
-                                        <label for="pass">Password*</label>
-                                        <input type="password" id="pass" placeholder="*********">
+                                        <label for="password">密码*</label>
+                                        <input type="password" id="password" placeholder="*********">
                                     </div>
                                     <div class="alternative-login">
-                                        <span><a href="#">Forget Password</a></span>
-                                        <span>Don't Have Account ?<a class="signup-link" href="#">Sign Up</a></span>
+                                        <span>没有账号 ?<a class="signup-link" href="${path}/register">去注册</a></span>
                                     </div> 
                                     <div class="signin-button-wrap">
-                                        <button type="submit" class="btn-bg2">Login</button>
+                                        <button id="login" type="submit" class="btn-bg2">登录</button>
                                     </div>
 
                                 </form>

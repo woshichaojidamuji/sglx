@@ -21,6 +21,7 @@
     <style>
         .icon{
             width: 20px;
+            height: 10px;
         }
         ul.pagination {
             display: inline-block;

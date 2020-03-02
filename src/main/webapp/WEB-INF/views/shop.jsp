@@ -20,8 +20,8 @@
 
     <style>
         .icon{
-            width: 20px;
-            height: 10px;
+            width: 30px;
+            height: 15px;
         }
         ul.pagination {
             display: inline-block;
@@ -169,6 +169,9 @@
                                     </div>
                                 </c:forEach>
                                 <br>
+                            </div>
+
+                            <div class="pages" style="text-align: center">
                                 <ul class="pagination">
                                     <li><a href="${path}/list?page=1&<c:if test="${param.kid != null}">kid=${param.kid}</c:if>">«</a></li>
                                     <c:forEach begin="1" end="${requestScope.pages}" varStatus="status">
@@ -176,6 +179,7 @@
                                     </c:forEach>
                                     <li><a href="${path}/list?page=${requestScope.pages}&<c:if test="${param.kid != null}">kid=${param.kid}</c:if>">»</a></li>
                                 </ul>
+
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -23,8 +24,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/login", produces = "application/json;charset=utf-8")
+    @ResponseBody
     public String login(HttpServletRequest request, String username, String password, String uri){
+        System.out.println("username = " + username);
+        System.out.println("password = " + password);
         Map<String, Object> login = userService.login(username, password);
+        System.out.println("login = " + login);
         Map<String, Object> json = new HashMap<>();
         if (login.containsKey("error")) {
             json.put("error",login);
@@ -35,6 +40,7 @@ public class UserController {
                 json.put("uri",uri);
             }
         }
+        System.out.println("json = " + json);
         return JSON.toJSONString(json);
     }
 
@@ -50,6 +56,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register", produces = "application/json;charset=utf-8")
+    @ResponseBody
     public String register(HttpServletRequest request, String username, String password, String tel, String email, String confirmPassword){
         Map<String, Object> register = userService.register(username, password, confirmPassword, tel, email);
         return JSON.toJSONString(register);

@@ -4,4 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.OrderMapper">
 
+    <select id="query" parameterType="map" resultType="orders">
+        SELECT * FROM orders
+        <where>
+            <if test="oid != null">
+                AND oid = #{oid}
+            </if>
+            <if test="uid != null">
+                AND uid = #{uid} ORDER BY create_time DESC
+            </if>
+        </where>
+    </select>
+
+    <select id="queryFruitByOid" parameterType="int" resultType="map">
+        SELECT detail.fid,detail.name,detail.img,detail.price,detail.amount FROM orders,detail WHERE orders.oid = detail.oid AND orders.oid = #{oid}
+    </select>
+
+    <select id="getTotalPrice" parameterType="int" resultType="double">
+        SELECT SUM(detail.price*detail.amount) total_price FROM orders,detail WHERE orders.oid = detail.oid AND orders.oid = #{oid}
+    </select>
+
+    <insert id="doInsert" parameterType="map" useGeneratedKeys="true" keyProperty="oid">
+        INSERT INTO orders (uid, aid) VALUES(#{uid},#{aid})
+    </insert>
+
+    <insert id="doInsertDetail" parameterType="map">
+        INSERT INTO detail (oid, fid, name, img, price, amount) VALUES(#{oid},#{fid},#{name},#{img},#{price},#{amount})
+    </insert>
+
+
 </mapper>

@@ -4,4 +4,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.CartMapper">
 
+    <select id="queryByUserId" parameterType="int" resultType="map">
+        SELECT cart.fid,fruit.img,fruit.name,fruit.price,cart.quantity FROM cart,fruit WHERE cart.fid = fruit.fid AND uid = #{uid}
+    </select>
+
+    <insert id="doInsert" parameterType="map">
+        INSERT INTO cart (uid, fid, quantity) VALUES (#{uid},#{fid},#{quantity})
+    </insert>
+
+    <select id="queryByUidAndFid" parameterType="map" resultType="map">
+        SELECT * FROM cart,fruit WHERE cart.fid = fruit.fid AND uid = #{uid} AND cart.fid = #{fid}
+    </select>
+
+    <update id="updateQuantity" parameterType="map">
+        UPDATE cart SET quantity = quantity + #{quantity} WHERE uid = #{uid} AND fid = #{fid} AND quantity + #{quantity} <![CDATA[ <= ]]> (SELECT stock FROM fruit WHERE fid = #{fid})
+    </update>
+
+    <delete id="doDelete" parameterType="map">
+        DELETE FROM cart WHERE uid = #{uid} AND fid = #{fid}
+    </delete>
+
+    <update id="addQuantity" parameterType="map">
+        UPDATE cart SET quantity = quantity + 1 WHERE uid = #{uid} AND fid = #{fid} AND quantity + 1 <![CDATA[ <= ]]> (SELECT stock FROM fruit WHERE fid = #{fid})
+    </update>
+
+    <update id="subQuantity" parameterType="map">
+        UPDATE cart SET quantity = quantity - 1 WHERE uid = #{uid} AND fid = #{fid}
+    </update>
+
+    <select id="queryTotal" parameterType="map" resultType="map">
+        SELECT SUM(quantity) total_quantity,SUM(quantity*price) total_price FROM cart,fruit WHERE fruit.fid = cart.fid AND uid = #{uid} AND cart.fid IN<foreach
+            collection="fids" item="fid" open="(" separator="," close=")">#{fid}</foreach>
+    </select>
+
+    <select id="queryFruit4Pay" parameterType="map" resultType="map">
+        SELECT fruit.fid,fruit.img,fruit.name,cart.quantity,fruit.price FROM cart,fruit WHERE cart.fid = fruit.fid AND uid = #{uid} AND fruit.fid IN<foreach
+            collection="fids" item="fid" open="(" separator="," close=")">#{fid}</foreach>
+    </select>
+
+
 </mapper>

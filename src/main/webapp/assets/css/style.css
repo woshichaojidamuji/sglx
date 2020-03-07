@@ -186,8 +186,6 @@
 
 .menu-collections .cart > i:after,
 .menu-collections .watch > i:after {
-    content: '2';
-    position: absolute;
     height: 17px;
     width: 17px;
     color: #FFFFFF;

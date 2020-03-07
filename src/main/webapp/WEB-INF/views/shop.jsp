@@ -20,8 +20,8 @@
 
     <style>
         .icon{
-            width: 30px;
-            height: 15px;
+            width: 40px;
+            height: 20px;
         }
         ul.pagination {
             display: inline-block;

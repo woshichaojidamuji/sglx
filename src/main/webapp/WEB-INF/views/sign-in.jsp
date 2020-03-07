@@ -23,6 +23,7 @@
         $(function () {
             $("#login").click(function () {
                 var data = $("#login-form").serialize();
+                console.log(data);
                 $.ajax({
                     url:"${path}/login",
                     type:"post",
@@ -99,11 +100,11 @@
                                     </c:if>
                                     <div class="email-field">
                                         <label for="username">用户名*</label>
-                                        <input type="text" id="username" placeholder="name">
+                                        <input type="text" id="username" name="username" placeholder="name">
                                     </div>
                                     <div class="password-field">
                                         <label for="password">密码*</label>
-                                        <input type="password" id="password" placeholder="*********">
+                                        <input type="password" id="password" name="password" placeholder="*********">
                                     </div>
                                     <div class="alternative-login">
                                         <span>没有账号 ?<a class="signup-link" href="${path}/register">去注册</a></span>

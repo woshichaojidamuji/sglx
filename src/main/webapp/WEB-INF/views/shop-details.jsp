@@ -51,7 +51,8 @@
 
     <style>
         .icon{
-            width: 20px;
+            width: 40px;
+            height: 20px;
         }
     </style>
 </head>
@@ -152,10 +153,10 @@
                                 <div class="col-xl-5">
                                     <div class="product-preview-wrap">
                                         <div class="tab-content bg-white p-50 b1 br-5">
-                                            <div class="tab-pane" id="preview1">
+                                            <div class="tab-pane active" id="preview1">
                                                 <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/1.jpg" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
                                             </div>
-                                            <div class="tab-pane active" id="preview2">
+                                            <div class="tab-pane" id="preview2">
                                                 <img src="${path}/assets/img/fruit/${requestScope.fruit.fid}/2.jpg" alt="Product Preview Image" data-magnify-src="${path}/assets/img/product/product23.png" />
                                             </div>
                                             <div class="tab-pane" id="preview3">

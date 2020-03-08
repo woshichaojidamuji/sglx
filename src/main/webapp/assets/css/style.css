@@ -1630,14 +1630,9 @@ input[type=number]::-webkit-outer-spin-button {
 .cart-single-item .product-price:before,
 .total-item .price:before,
 .product-total-price:before {
-    content: '$';
+    content: '￥';
 }
 
-.cart-single-item .product-price:after,
-.total-item .price:after,
-.product-total-price:after {
-    content: '.00';
-}
 
 .price-title,
 .product-price {

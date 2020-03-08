@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.CartMapper">
 
-    <select id="queryByUserId" parameterType="int" resultType="map">
+    <select id="queryByUid" parameterType="int" resultType="map">
         SELECT cart.fid,fruit.img,fruit.name,fruit.price,cart.quantity FROM cart,fruit WHERE cart.fid = fruit.fid AND uid = #{uid}
     </select>
 

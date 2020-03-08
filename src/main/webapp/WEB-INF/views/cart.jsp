@@ -18,6 +18,60 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var url = "${path}/checkout?"
+            $("#checkout").click(function () {
+                $("input[name='fid']").each(function () {
+                    url += "fid=" + this.value + "&";
+                });
+                location = url;
+            })
+        });
+        function updateQuantity(e,fid,action) {
+            var quantity = $(e).parent().children("input").val();
+            if (quantity === "1" && action === "sub") {
+                alert("宝贝不能再减少了");
+                return;
+            }
+            $.ajax({
+                url:"${path}/updateQuantity",
+                type:"get",
+                data:{
+                    fid:fid,
+                    action:action
+                },
+                success: function (res) {
+                    if (!res.success) {
+                        alert("添加失败，库存不足");
+                    }
+                }
+            });
+        }
+
+        function del(fid) {
+
+            $.ajax({
+                url:"${path}/delete",
+                type:"get",
+                data:{
+                    fid:fid
+                },
+                success:function (res) {
+                    if (res.success) {
+                        //删除成功
+                        alert("删除成功");
+                    } else {
+                        //删除失败
+                        alert("删除失败");
+                    }
+                }
+            });
+
+        }
+    </script>
+
 </head>
 
 <body>
@@ -66,110 +120,50 @@
             <div class="container">
                 <div class="row col-gap-60">
 
-                    <div class="col-xl-8">
+                    <div class="col-xl-12">
                         <div class="cart-total-product rmb-80 b1 br-5 p-50">
-                            <h4 class="cart-heading">Shopping Cart</h4>
+                            <h4 class="cart-heading">购物车</h4>
                             <div class="cart-title d-none d-md-flex">
-                                <h5 class="product-title">Product</h5>
-                                <h5 class="quantity-title">Quantity</h5>
-                                <h5 class="price-title">Price</h5>
-                                <h5 class="total-title">Total</h5>
+                                <h5 class="product-title">商品</h5>
+                                <h5 class="quantity-title">数量</h5>
+                                <h5 class="price-title">价格</h5>
+                                <h5 class="total-title">小计</h5>
                             </div>
                             <div class="cart-items pb-15">
-                                <div class="cart-single-item">
-                                    <button type="button" class="close"><i class="flaticon-cross"></i></button>
-                                    <div class="product-img">
-                                        <img src="${path}/assets/img/shop/cart-1.png" alt="Product Image">
+                                <c:forEach items="${requestScope.fruit}" var="fruit">
+                                    <div class="cart-single-item">
+                                        <input type="hidden" value="${fruit.fid}" name="fid">
+                                        <button type="button" class="close" onclick="del(${fruit.fid})"><i class="flaticon-cross"></i></button>
+                                        <div class="product-img">
+                                            <img src="${path}/${fruit.img}" alt="Product Image">
+                                        </div>
+                                        <h6 class="product-name">${fruit.name}</h6>
+                                        <div class="number-input">
+                                            <button class="minus" onclick="updateQuantity(this,${fruit.fid},'sub')"></button>
+                                            <input class="quantity" min="1" name="quantity" value="${fruit.quantity}" type="number">
+                                            <button class="plus" onclick="updateQuantity(this,${fruit.fid},'add')"></button>
+                                        </div>
+                                        <h6 class="product-price">${fruit.price}</h6>
+                                        <h6 class="product-total-price">${fruit.price*fruit.quantity}</h6>
                                     </div>
-                                    <h6 class="product-name">Organic Cauliflower (1kg)</h6>
-                                    <div class="number-input">
-                                      <button class="minus"></button>
-                                      <input class="quantity" min="1" name="quantity" value="2" type="number">
-                                      <button class="plus"></button>
-                                    </div>
-                                    <h6 class="product-price">120</h6>
-                                    <h6 class="product-total-price">240</h6>
-                                </div>
-                                <div class="cart-single-item">
-                                    <button type="button" class="close"><i class="flaticon-cross"></i></button>
-                                    <div class="product-img">
-                                        <img src="${path}/assets/img/shop/cart-2.png" alt="Product Image">
-                                    </div>
-                                    <h6 class="product-name">Healthy Organic Yellow Papaya (1ps)</h6>
-                                    <div class="number-input">
-                                      <button class="minus"></button>
-                                      <input class="quantity" min="1" name="quantity" value="2" type="number">
-                                      <button class="plus"></button>
-                                    </div>
-                                    <h6 class="product-price">120</h6>
-                                    <h6 class="product-total-price">240</h6>
-                                </div>
-                                <div class="cart-single-item">
-                                    <button type="button" class="close"><i class="flaticon-cross"></i></button>
-                                    <div class="product-img">
-                                        <img src="${path}/assets/img/shop/cart-3.png" alt="Product Image">
-                                    </div>
-                                    <h6 class="product-name">Organic Granny Smith Apple (4ps)</h6>
-                                    <div class="number-input">
-                                      <button class="minus"></button>
-                                      <input class="quantity" min="1" name="quantity" value="2" type="number">
-                                      <button class="plus"></button>
-                                    </div>
-                                    <h6 class="product-price">120</h6>
-                                    <h6 class="product-total-price">240</h6>
-                                </div>
+                                </c:forEach>
                             </div>
 
                             <div class="row text-center text-lg-left">
                                 <div class="col-lg-5">
                                     <div class="continue-shopping">
-                                        <button class="theme-btn no-shadow bg-blue br-5" type="submit">Continue Shopping</button>
+                                        <a href="${path}/list"><button class="theme-btn no-shadow bg-blue br-5" type="submit">继续购物</button></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="update-shopping text-lg-right">
-                                        <a href="#" class="theme-btn no-shadow style-two br-10 rmt-30">Update Cart</a>
+                                        <a id="checkout" href="javascript:void (0)" class="theme-btn no-shadow style-two br-10 rmt-30">结算</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-xl-4">
-                        <div class="cart-total-price p-50">
-                            <h4 class="cart-heading">Order Summary</h4>
-                            <div class="total-item-wrap">
-                                <div class="total-item sub-total">
-                                    <span class="title">Total Item 6</span>
-                                    <span class="price">720</span>
-                                </div>
-                                <div class="total-item shipping">
-                                    <span class="title">Shipping Cost</span>
-                                    <span class="price">10</span>
-                                </div>
-                                <form action="#" class="d-lg-block">
-                                   <h6 class="mb-25 mt-30">Promo Code</h6>
-                                    <input class="w-100 br-5" type="text" placeholder="Enter Discount Code">
-                                    <button class="theme-btn no-shadow bg-blue br-5" type="submit">Apply</button>
-                                </form>
-                                <div class="total-item discount">
-                                    <span class="title">Discount</span>
-                                    <span class="price">0</span>
-                                </div>
-                                <div class="total-item total">
-                                    <span class="title mb-0">Total</span>
-                                    <span class="price mb-0">730</span>
-                                </div>
-                            </div>
-                            <div class="proceed-btn mt-30">
-                                <a href="checkout.jsp" class="theme-btn w-100 text-center br-10">Proceed Checkout</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
-                
-                
             </div>
         </section>
         <!--==================================================================== 

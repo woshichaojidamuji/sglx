@@ -1,13 +1,11 @@
 package com.yaowei.service;
 
-import com.yaowei.entity.Cart;
-
 import java.util.List;
 import java.util.Map;
 
 public interface CartService {
 
-    List<Cart> getCartFruit(Integer uid);
+    List<Map<String,Object>> getCartFruit(Integer uid);
 
     boolean addCart(Integer uid, Integer fid, Integer quantity);
 

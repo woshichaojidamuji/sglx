@@ -21,12 +21,22 @@
     <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("register").click(function () {
-                var data = $("#register-form").serialize();
+            $("#register").click(function () {
+                var username = $("#username").val();
+                var tel = $("#tel").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                var confirmPassword = $("#confirmPassword").val();
                 $.ajax({
                     url:"${path}/register",
                     type:"post",
-                    data:data,
+                    data:{
+                        username:username,
+                        tel:tel,
+                        email:email,
+                        password:password,
+                        confirmPassword:confirmPassword
+                    },
                     success:function (res) {
                         if (res.error){
                             alert(res.error);
@@ -35,7 +45,8 @@
                             location = "${path}/register";
                         }
                     }
-                })
+                });
+                return false;
             })
         })
     </script>
@@ -95,7 +106,7 @@
                                 <form id="register-form" action="${path}/register" method="post" class="login-form">
                                     <div class="text-field">
                                         <label for="username">用户名*</label>
-                                        <input type="text" id="username" placeholder="name">
+                                        <input type="text" id="username" name="username" placeholder="name">
                                     </div>
                                     <div class="email-field">
                                         <label for="email">电话号码*</label>
@@ -108,6 +119,10 @@
                                     <div class="password-field">
                                         <label for="password">密码*</label>
                                         <input type="password" id="password" placeholder="*********">
+                                    </div>
+                                    <div class="password-field">
+                                        <label for="confirmPassword">确认密码*</label>
+                                        <input type="password" id="confirmPassword" placeholder="*********">
                                     </div>
                                     <div class="alternative-login">
                                         已有账号 ?<a class="signup-link" href="${path}/login">去登陆</a>

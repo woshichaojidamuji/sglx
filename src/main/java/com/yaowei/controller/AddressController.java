@@ -26,8 +26,8 @@ public class AddressController {
     @GetMapping("/address")
     public String allAddress(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        int uid = user.getUid();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
         List<Address> address = addressService.getAddress(uid);
         model.addAttribute("address",address);
         return "address";
@@ -44,8 +44,8 @@ public class AddressController {
     @ResponseBody
     public String add2Address(HttpServletRequest request, String name, String tel, String province, String city, String county, String address, String code){
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        int uid = user.getUid();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
         Map<String,Object> map = new HashMap<>();
         map.put("name",name);
         map.put("tel",tel);
@@ -72,8 +72,8 @@ public class AddressController {
         boolean delete = addressService.delete(aid);
         if (delete){
             HttpSession session = request.getSession();
-            Users user = (Users) session.getAttribute("user");
-            int uid = user.getUid();
+            Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+            Integer uid = Integer.parseInt(user.get("uid").toString());
             Map<String,Object> map = new HashMap<>();
             map.put("name",name);
             map.put("tel",tel);

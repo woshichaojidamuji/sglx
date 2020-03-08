@@ -18,16 +18,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> login(String username, String password) {
         Map<String, Object> param = new HashMap<>();
-        HashMap<String, Object> user = new HashMap<>();
         param.put("username",username);
-        Users users = userMapper.query(param);
-        if (users == null) {
+        Map<String, Object> user = userMapper.query(param);
+        if (user == null) {
             //用户名不存在
+            user = new HashMap<>();
             user.put("error","用户名不存在");
         } else {
-            if (users.getPassword().equals(password)) {
-                user.put("user",users);
+            if (user.get("password").equals(password)) {
+                return user;
             } else {
+                user.clear();
                 user.put("error","密码错误");
             }
         }
@@ -42,7 +43,9 @@ public class UserServiceImpl implements UserService {
         param.put("password",password);
         param.put("tel",tel);
         param.put("email",email);
-        Users user = userMapper.query(param);
+        System.out.println("param =================================== " + param);
+        Map<String,Object> user = userMapper.query(param);
+        System.out.println("user ==================================== " + user);
         if (user !=null) {
             //用户名重复
             map.put("error","用户名已存在");
@@ -59,9 +62,9 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> param = new HashMap<>();
         param.put("uid",uid);
-        param.put("newPassword",password);
-        Users user = userMapper.query(param);
-        if (!password.equals(user.getPassword())) {
+        param.put("password",newPassword);
+        Map<String,Object> user = userMapper.query(param);
+        if (!password.equals(user.get("password"))) {
             map.put("error","原密码错误");
         } else if (! newPassword.equals(confirmPassword)) {
             map.put("error","两次密码不一致");

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,10 +27,7 @@ public class UserController {
     @PostMapping(value = "/login", produces = "application/json;charset=utf-8")
     @ResponseBody
     public String login(HttpServletRequest request, String username, String password, String uri){
-        System.out.println("username = " + username);
-        System.out.println("password = " + password);
         Map<String, Object> login = userService.login(username, password);
-        System.out.println("login = " + login);
         Map<String, Object> json = new HashMap<>();
         if (login.containsKey("error")) {
             json.put("error",login);
@@ -40,7 +38,6 @@ public class UserController {
                 json.put("uri",uri);
             }
         }
-        System.out.println("json = " + json);
         return JSON.toJSONString(json);
     }
 
@@ -60,5 +57,20 @@ public class UserController {
     public String register(HttpServletRequest request, String username, String password, String tel, String email, String confirmPassword){
         Map<String, Object> register = userService.register(username, password, confirmPassword, tel, email);
         return JSON.toJSONString(register);
+    }
+
+    @GetMapping("/editPassword")
+    public String toEditPassword(){
+        return "editPassword";
+    }
+
+    @PostMapping(value = "/editPassword", produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String editPassword(HttpServletRequest request, String password, String newPassword, String confirmPassword){
+        HttpSession session = request.getSession();
+        Map<String,Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
+        Map<String, Object> map = userService.editPassword(uid, password, newPassword, confirmPassword);
+        return JSON.toJSONString(map);
     }
 }

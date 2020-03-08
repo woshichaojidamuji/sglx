@@ -30,8 +30,8 @@ public class OrderController {
     @GetMapping("/order")
     public String order(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        Integer uid = user.getUid();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
         List<Map<String, Object>> orderList = orderService.getOrders(uid);
         model.addAttribute("orderList",orderList);
         return "order";
@@ -41,8 +41,8 @@ public class OrderController {
     @ResponseBody
     public String submit(HttpServletRequest request, Integer aid, Integer[] fid){
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        Integer uid = user.getUid();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
         boolean submit = orderService.submit(uid, aid, fid);
         return "{\"success\":"+submit+"}";
     }
@@ -50,8 +50,8 @@ public class OrderController {
     @GetMapping("/checkout")
     public String checkout(HttpServletRequest request, Integer[] fid, Model model){
         HttpSession session = request.getSession();
-        Users user = (Users) session.getAttribute("user");
-        int uid = user.getUid();
+        Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
+        Integer uid = Integer.parseInt(user.get("uid").toString());
         List<Address> addressList = addressService.getAddress(uid);
         List<Map<String, Object>> fruitList = cartService.getFruits4Pay(uid, fid);
         Map<String, Object> total = cartService.getTotal(uid, fid);

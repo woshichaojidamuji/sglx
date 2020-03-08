@@ -41,12 +41,14 @@
                     <div class="collection-inner">
                         <ul>
                             <li><a href="${path}/cart">购物车</a></li>
-                            <li><a href="${path}/order">订单</a></li>
+                            <li><a href="${path}/order">订单中心</a></li>
+                            <li><a href="${path}/address">地址管理</a></li>
                             <c:if test="${sessionScope.user==null}">
                                 <li><a href="${path}/login">登录</a></li>
                                 <li><a href="${path}/register">注册</a></li>
                             </c:if>
                             <c:if test="${sessionScope.user!=null}">
+                                <li><a href="${path}/editPassword">修改密码</a></li>
                                 <li><a href="${path}/logout">退出</a></li>
                             </c:if>
                         </ul>

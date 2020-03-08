@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface UserMapper {
 
-    Users query(Map<String,Object> param);
+    Map<String,Object> query(Map<String,Object> param);
 
     boolean createUser(Map<String,Object> param);
 

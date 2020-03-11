@@ -1,9 +1,5 @@
 package com.yaowei.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.yaowei.entity.Address;
-import com.yaowei.entity.Orders;
-import com.yaowei.mapper.AddressMapper;
 import com.yaowei.mapper.CartMapper;
 import com.yaowei.mapper.FruitMapper;
 import com.yaowei.mapper.OrderMapper;
@@ -21,8 +17,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
-    private AddressMapper addressMapper;
-    @Autowired
     private CartMapper cartMapper;
     @Autowired
     private FruitMapper fruitMapper;
@@ -33,25 +27,23 @@ public class OrderServiceImpl implements OrderService {
         param.put("uid",uid);
         List<Map<String, Object>> orderList = orderMapper.query(param);
         for (Map<String, Object> map : orderList) {
-            int aid = Integer.parseInt(map.get("aid").toString());
-            Address address = addressMapper.queryByAid(aid);
-            map.put("address",address);
+            map.put("address",map.get("address"));
             int oid = Integer.parseInt(map.get("oid").toString());
             Double totalPrice = orderMapper.getTotalPrice(oid);
             map.put("totalPrice",totalPrice);
             List<Map<String, Object>> fruits = orderMapper.queryFruitByOid(oid);
-            map.put("products",fruits);
+            map.put("fruits",fruits);
         }
         return orderList;
     }
 
     @Override
-    public boolean submit(Integer uid, Integer aid, Integer[] fids) {
+    public boolean submit(Integer uid, String address, Integer[] fids) {
         int result = 0;
         //1.向订单主表插入数据(1条)
         Map<String,Object> param = new HashMap<>();
         param.put("uid",uid);
-        param.put("aid",aid);
+        param.put("address",address);
         orderMapper.doInsert(param);
         int oid = Integer.parseInt(param.get("oid").toString());
         for (Integer fid : fids) {
@@ -85,15 +77,10 @@ public class OrderServiceImpl implements OrderService {
         List<Map<String, Object>> query = orderMapper.query(param);
         Map<String, Object> order = query.get(0);
         orderList.put("order",order);
-        //获取地址编号
-        int aid = Integer.parseInt(order.get("aid").toString());
-        //2.查询订单对应的地址
-        Address address = addressMapper.queryByAid(aid);
-        orderList.put("address",address);
-        //3.查询出订单的总价钱
+        //查询出订单的总价钱
         Double totalPrice = orderMapper.getTotalPrice(oid);
         orderList.put("totalPrice",totalPrice);
-        //4.查询出订单对应的商品
+        //查询出订单对应的商品
         List<Map<String, Object>> fruit = orderMapper.queryFruitByOid(oid);
         orderList.put("fruit",fruit);
         return orderList;

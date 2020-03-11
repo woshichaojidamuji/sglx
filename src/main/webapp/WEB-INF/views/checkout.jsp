@@ -18,6 +18,42 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#submit_btn").click(function () {
+                var url = "${path}/submit?";
+                //获取收货地址的编号
+                var address = $("#address").val();
+                if (address == null){
+                    alert("请输入收货地址!");
+                } else {
+                    //获取要结算的商品编号
+                    $(":hidden[name='fid']").each(function () {
+                        url += "fid="+this.value+"&"
+                    });
+                    $.ajax({
+                        url:url,
+                        type:"get",
+                        data:{
+                            address:address
+                        },
+                        success:function (res) {
+                            if (res.success) {
+                                alert("下单成功");
+                                location = "${path}/order";
+                            }else {
+                                alert("下单失败");
+                            }
+                        }
+                    });
+                }
+            });
+            $(".addre").click(function(){
+                $(this).addClass("on").siblings().removeClass("on");
+            });
+        });
+    </script>
 
 </head>
 
@@ -66,181 +102,35 @@
         <section class="checkout-page mt-120 rmt-80 mb-120 rmb-80">
             <div class="container">
                 <div class="row col-gap-60">
-                    <div class="col-xl-8 col-lg-6">
-                        <div class="checkout-form-wrap rmb-50">
-                           
-                           <div class="cart-title">
-                                <h4>Billing Details</h4>
-                            </div>
-                            
-                            <!-- Form Area Start -->
-                            <form id="checkout-form" name="checkout-form" class="checkout-form" action="sendmail.php" method="POST">
-                                <div class="row col-gap-50 clearfix">
-                                    <div class="col-md-6">        
-                                        <div class="form-group">
-                                            <label for="f-name">First Name*</label>
-                                            <input type="text" class="form-control" id="f-name" placeholder="Jhon" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">        
-                                        <div class="form-group">
-                                            <label for="l-name">Lastst Name*</label>
-                                            <input type="text" class="form-control" id="l-name" placeholder="Mack" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="country">Country*</label>
-                                            <select class="form-control" id="country" name="select1">
-                                                <option value="value1">Select Country</option>
-                                                <option value="value2">United States</option>
-                                                <option value="value3">United Kingdom</option>
-                                                <option value="value4">Qatar</option>
-                                                <option value="value5">Russia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="city">Town / City*</label>
-                                            <select class="form-control" id="city" name="select1">
-                                                <option value="value1">Select Option</option>
-                                                <option value="value2">Kushtia</option>
-                                                <option value="value3">Khulna</option>
-                                                <option value="value4">Dhaka</option>
-                                                <option value="value5">Borisal</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="district">District*</label>
-                                            <select class="form-control" id="district" name="select1">
-                                                <option value="value1">Select District</option>
-                                                <option value="value2">Dhaka</option>
-                                                <option value="value3">Khulna</option>
-                                                <option value="value4">Barisal</option>
-                                                <option value="value5">Rsjshahi</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">        
-                                        <div class="form-group">
-                                            <label for="post-code">Postal Code*</label>
-                                            <input type="text" class="form-control" id="post-code" placeholder="Enter Post Code" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="street-address">Street Address*</label>
-                                            <input type="text" class="form-control" id="street-address" placeholder="Enter Your Delivery Address" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone-number">Phone Number*</label>
-                                            <input type="text" class="form-control" id="phone-number" placeholder="+01 000...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email">Email <span>(optional)</span></label>
-                                            <input type="email" class="form-control" id="email" placeholder="eg: yourmail@gmail.com" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="email">Other Note <span>(optional)</span></label>
-                                            <textarea class="form-control mb-0" placeholder="+01 000..." rows="8" required></textarea>
-                                        </div>
-                                    </div>                                                
-                                </div>
-                            </form>
-                            <!-- Form Area End -->
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6">
+                    <div class="col-xl-12 col-lg-6">
                         <div class="checkout-cart-total clearfix">
-                           <div class="cart-title">
-                                <h4>Order Summary</h4>
-                            </div>
-                            
-                            <div class="total-item-wrap clearfix">
-                                <div class="total-item">
-                                    <span class="title">Organic Cauliflower (1kg)</span>
-                                    <span class="price">240</span>
-                                </div>
-                                <div class="total-item">
-                                    <span class="title">Organic Yellow Papaya (1ps)</span>
-                                    <span class="price">240</span>
-                                </div>
-                                <div class="total-item">
-                                    <span class="title">Organic Granny Apple (4ps)</span>
-                                    <span class="price">240</span>
-                                </div>
-                                <div class="total-item">
-                                    <span class="title">Shipping Cost</span>
-                                    <span class="price">10</span>
-                                </div>
-                                <div class="total-item discount">
-                                    <span class="title">Discount</span>
-                                    <span class="price">0</span>
-                                </div>
-                                <div class="total-item total">
-                                    <span class="title">Total</span>
-                                    <span class="price">730</span>
-                                </div>
-                            </div>
-                            
                             <div class="cart-title">
-                                <h4 class="mb-25 mt-10">Payment</h4>
+                                <h4>确认订单</h4>
                             </div>
-                            <ul id="accordionExample" class="mb-40">
-                                
-                                
-                                <!-- Default unchecked -->
-                                <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="methodone" name="defaultExampleRadios" checked>
-                                    <label class="custom-control-label" for="methodone" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">Direct Bank Transfer</label>
 
-                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample" style="">
-                                        <p>Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. In sagittis eg esta ante, sed viverra nunc tinci dunt nec elei fend et tiram.</p>
+                            <div class="total-item-wrap clearfix">
+                                <c:forEach items="${requestScope.fruitList}" var="fruit">
+                                    <input type="hidden" name="fid" value="${fruit.fid}">
+                                    <div class="total-item">
+                                        <span class="title">${fruit.name}*${fruit.quantity}</span>
+                                        <span class="price">${fruit.price*fruit.quantity}</span>
                                     </div>
-                                </li>
+                                </c:forEach>
+                                <p>共${requestScope.total.total_quantity}件</p>
+                                <p>总价：${requestScope.total.total_price}</p>
+                            </div>
 
-                                <!-- Default unchecked -->
-                                <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="methodtwo" name="defaultExampleRadios">
-                                    <label class="custom-control-label collapsed" for="methodtwo" data-toggle="collapse" data-target="#collapseTwo" aria-controls="collapseTwo">Credit Card / Master Card</label>
+                            <div class="cart-title">
+                                <h4 class="mb-25 mt-10">收货地址</h4>
+                                <textarea id="address" cols="110" rows="8" style="border: 1px solid grey"></textarea>
+                            </div>
 
-                                    <div id="collapseTwo" class="collapse" data-parent="#accordionExample" style="">
-                                        <ul>
-                                            <li><a href="#"><img src="${path}/assets/img/pay-method/visa.png" alt=""></a></li>
-                                            <li><a href="#"><img src="${path}/assets/img/pay-method/mastercard.png" alt=""></a></li>
-                                            <li><a href="#"><img src="${path}/assets/img/pay-method/discover.png" alt=""></a></li>
-                                            <li><a href="#"><img src="${path}/assets/img/pay-method/americanexpress.png" alt=""></a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <!-- Default unchecked -->
-                                <li class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="methodthree" name="defaultExampleRadios">
-                                    <label class="custom-control-label collapsed" for="methodthree" data-toggle="collapse" data-target="#collapsethree" aria-controls="collapsethree">Cash On Delivery</label>
-
-                                    <div id="collapsethree" class="collapse" data-parent="#accordionExample" style="">
-                                        <p>Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. In sagittis eg esta ante, sed viverra nunc tinci dunt nec elei fend et tiram.</p>
-                                    </div>
-
-                                </li>
-                            </ul>
-                            
                             <div class="checkout-btn text-center">
-                                <button class="theme-btn br-5 w-100">Place Order</button>
+                                <button id="submit_btn" class="theme-btn br-5 w-100">提交订单</button>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>

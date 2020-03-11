@@ -1,9 +1,5 @@
 package com.yaowei.controller;
 
-import com.yaowei.entity.Address;
-import com.yaowei.entity.Orders;
-import com.yaowei.entity.Users;
-import com.yaowei.service.AddressService;
 import com.yaowei.service.CartService;
 import com.yaowei.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +19,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private AddressService addressService;
-    @Autowired
     private CartService cartService;
 
     @GetMapping("/order")
@@ -39,11 +33,11 @@ public class OrderController {
 
     @GetMapping(value = "/submit", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String submit(HttpServletRequest request, Integer aid, Integer[] fid){
+    public String submit(HttpServletRequest request, String address, Integer[] fid){
         HttpSession session = request.getSession();
         Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
         Integer uid = Integer.parseInt(user.get("uid").toString());
-        boolean submit = orderService.submit(uid, aid, fid);
+        boolean submit = orderService.submit(uid, address, fid);
         return "{\"success\":"+submit+"}";
     }
 
@@ -52,11 +46,10 @@ public class OrderController {
         HttpSession session = request.getSession();
         Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
         Integer uid = Integer.parseInt(user.get("uid").toString());
-        List<Address> addressList = addressService.getAddress(uid);
         List<Map<String, Object>> fruitList = cartService.getFruits4Pay(uid, fid);
         Map<String, Object> total = cartService.getTotal(uid, fid);
-        model.addAttribute("addressList",addressList);
         model.addAttribute("fruitList",fruitList);
+        System.out.println("fruitList = " + fruitList);
         model.addAttribute("total",total);
         return "checkout";
     }

@@ -25,7 +25,7 @@
     </select>
 
     <insert id="doInsert" parameterType="map" useGeneratedKeys="true" keyProperty="oid">
-        INSERT INTO orders (uid, aid) VALUES(#{uid},#{aid})
+        INSERT INTO orders (uid, address) VALUES(#{uid},#{address})
     </insert>
 
     <insert id="doInsertDetail" parameterType="map">

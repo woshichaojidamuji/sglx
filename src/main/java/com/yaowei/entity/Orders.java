@@ -5,17 +5,17 @@ import java.sql.Timestamp;
 public class Orders {
     private Integer oid;
     private Integer uid;
-    private Integer aid;
+    private String address;
     private Integer status;
     private Timestamp createTime;
 
     public Orders() {
     }
 
-    public Orders(Integer oid, Integer uid, Integer aid, Integer status, Timestamp createTime) {
+    public Orders(Integer oid, Integer uid, String address, Integer status, Timestamp createTime) {
         this.oid = oid;
         this.uid = uid;
-        this.aid = aid;
+        this.address = address;
         this.status = status;
         this.createTime = createTime;
     }
@@ -36,12 +36,12 @@ public class Orders {
         this.uid = uid;
     }
 
-    public Integer getAid() {
-        return aid;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAid(Integer aid) {
-        this.aid = aid;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getStatus() {

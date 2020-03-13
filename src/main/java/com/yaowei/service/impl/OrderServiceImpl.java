@@ -38,11 +38,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean submit(Integer uid, String address, Integer[] fids) {
+    public boolean submit(Integer uid, String name, String tel, String address, Integer[] fids) {
         int result = 0;
         //1.向订单主表插入数据(1条)
         Map<String,Object> param = new HashMap<>();
         param.put("uid",uid);
+        param.put("name",name);
+        param.put("tel",tel);
         param.put("address",address);
         orderMapper.doInsert(param);
         int oid = Integer.parseInt(param.get("oid").toString());

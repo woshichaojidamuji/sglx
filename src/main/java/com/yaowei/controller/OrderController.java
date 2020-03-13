@@ -33,11 +33,11 @@ public class OrderController {
 
     @GetMapping(value = "/submit", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String submit(HttpServletRequest request, String address, Integer[] fid){
+    public String submit(HttpServletRequest request, String name, String tel, String address, Integer[] fid){
         HttpSession session = request.getSession();
         Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
         Integer uid = Integer.parseInt(user.get("uid").toString());
-        boolean submit = orderService.submit(uid, address, fid);
+        boolean submit = orderService.submit(uid, name, tel, address, fid);
         return "{\"success\":"+submit+"}";
     }
 

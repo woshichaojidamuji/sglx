@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaowei.mapper.OrderMapper">
 
-    <select id="query" parameterType="map" resultType="orders">
+    <select id="query" parameterType="map" resultType="map">
         SELECT * FROM orders
         <where>
             <if test="oid != null">
@@ -25,7 +25,7 @@
     </select>
 
     <insert id="doInsert" parameterType="map" useGeneratedKeys="true" keyProperty="oid">
-        INSERT INTO orders (uid, address) VALUES(#{uid},#{address})
+        INSERT INTO orders (uid, name, tel, address) VALUES(#{uid},#{name},#{tel},#{address})
     </insert>
 
     <insert id="doInsertDetail" parameterType="map">

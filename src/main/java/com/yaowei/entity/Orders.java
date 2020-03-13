@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 public class Orders {
     private Integer oid;
     private Integer uid;
+    private String name;
+    private String tel;
     private String address;
     private Integer status;
     private Timestamp createTime;
@@ -12,9 +14,11 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Integer oid, Integer uid, String address, Integer status, Timestamp createTime) {
+    public Orders(Integer oid, Integer uid, String name, String tel, String address, Integer status, Timestamp createTime) {
         this.oid = oid;
         this.uid = uid;
+        this.name = name;
+        this.tel = tel;
         this.address = address;
         this.status = status;
         this.createTime = createTime;
@@ -34,6 +38,22 @@ public class Orders {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public String getAddress() {

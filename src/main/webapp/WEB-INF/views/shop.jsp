@@ -18,6 +18,35 @@
     <link rel="stylesheet" href="${path}/assets/css/style.css">
     <link rel="stylesheet" href="${path}/assets/css/responsive.css">
 
+    <script type="text/javascript" src="${path}/assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        function addCart(e) {
+            var fid = e;
+            var quantity = 1;
+            $.ajax({
+                url:"${path}/addCart",
+                type:"post",
+                data:{
+                    fid:fid,
+                    quantity:quantity
+                },
+                success:function (res) {
+                    if (res.isLogin === false){
+                        alert("请先登录");
+                        location = "${path}/login?uri="+res.uri;
+                        return;
+                    }
+                    if (res.success){
+                        alert("添加成功");
+                        location = "${path}/fruit?fid="+fid;
+                    }else {
+                        alert("添加失败，库存不足");
+                    }
+                }
+            })
+        }
+    </script>
+
     <style>
         .icon{
             width: 40px;
@@ -154,7 +183,7 @@
                                                     <p><a href="${path}/fruit?fid=${fruit.fid}">${fruit.name}<br>(500 kg)</a></p>
                                                 </div>
                                                 <div class="product-action">
-                                                    <a href="#" class="add-to-btn small-btn">
+                                                    <a href="javascript:void (0)" onclick="addCart(${fruit.fid})" class="add-to-btn small-btn">
                                                         <i class="flaticon-shopping-cart"></i>
                                                         <span>加入购物车</span>
                                                         <h5 class="product-price">${fruit.price}</h5>

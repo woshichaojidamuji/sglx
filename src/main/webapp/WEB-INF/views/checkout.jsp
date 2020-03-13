@@ -25,6 +25,8 @@
                 var url = "${path}/submit?";
                 //获取收货地址的编号
                 var address = $("#address").val();
+                var name = $("#name").val();
+                var tel = $("#tel").val();
                 if (address == null){
                     alert("请输入收货地址!");
                 } else {
@@ -36,6 +38,8 @@
                         url:url,
                         type:"get",
                         data:{
+                            name:name,
+                            tel:tel,
                             address:address
                         },
                         success:function (res) {
@@ -118,6 +122,16 @@
                                 </c:forEach>
                                 <p>共${requestScope.total.total_quantity}件</p>
                                 <p>总价：${requestScope.total.total_price}</p>
+                            </div>
+
+                            <div class="cart-title">
+                                <h4>收货人姓名</h4>
+                                <input type="text" id="name" style="border: 1px solid grey">
+                            </div>
+
+                            <div class="cart-title">
+                                <h4>联系方式</h4>
+                                <input type="text" id="tel" style="border: 1px solid grey">
                             </div>
 
                             <div class="cart-title">

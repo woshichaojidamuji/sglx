@@ -72,6 +72,8 @@
                             </div>
                             <c:forEach items="${requestScope.orderList}" var="order">
                                 <div class="total-item-wrap clearfix" style="border: 1px solid grey;padding: 20px">
+                                    <c:if test="${order.status==1}"><h5>待收货</h5></c:if>
+                                    <c:if test="${order.status==2}"><h5>已完成</h5></c:if>
                                     <p>创建时间：${order.create_time} | 订单号：${order.oid} | 收件人：${order.name}</p>
                                     <p>总价：${order.totalPrice}</p>
                                     <c:forEach items="${order.fruits}" var="fruit" varStatus="status">
@@ -83,6 +85,7 @@
                                         <c:if test="${status.last==true}">
                                             <div class="tag-list" style="float: right">
                                                 <a href="${path}/detail?oid=${order.oid}">查看详情</a>
+                                                <c:if test="${order.status==1}"><a href="javascript:void (0)" onclick="config(${order.oid})">|确认收货</a></c:if>
                                             </div>
                                         </c:if>
                                     </c:forEach>
@@ -131,6 +134,26 @@
 
 <!-- Custom script -->
 <script src="${path}/assets/js/script.js"></script>
+<script src="${path}/assets/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    function config(e) {
+        $.ajax({
+            url:"${path}/configOrder",
+            type:"get",
+            data:{
+                oid:e
+            },
+            success: function (res) {
+                if (res.success){
+                    alert("收货成功!");
+                    location = "${path}/order";
+                } else {
+                    alert("收货失败");
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 

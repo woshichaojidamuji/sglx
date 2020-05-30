@@ -30,9 +30,9 @@
             </form>
 
             <div class="menu-collections">
-                <div class="collection-item watch" style="width: 50px">
+                <%--<div class="collection-item watch" style="width: 50px">
                     <a href="${path}/wish"><i class="flaticon-heart"></i></a>
-                </div>
+                </div>--%>
                 <div class="collection-item cart" style="width: 50px">
                     <a href="${path}/cart"><i class="flaticon-shopping-cart"></i></a>
                 </div>

@@ -38,7 +38,6 @@
                     }
                     if (res.success){
                         alert("添加成功");
-                        location = "${path}/fruit?fid="+fid;
                     }else {
                         alert("添加失败，库存不足");
                     }
@@ -173,7 +172,7 @@
                                     <div class="col-xl-4 col-lg-6 col-sm-6">
                                         <div class="product">
                                             <div class="product-img-wrap">
-                                                <img src="${path}/${fruit.img}" alt="img">
+                                                <img src="${path}/${fruit.img}" alt="img" style="width: 253px;height: 253px">
                                                 <!-- Button trigger modal -->
                                                 <button class="quick-view" type="button" data-toggle="modal" data-target="#quick-view"><a href="${path}/fruit?fid=${fruit.fid}">查看详情</a></button>
                                             </div>

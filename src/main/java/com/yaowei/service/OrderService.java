@@ -15,4 +15,7 @@ public interface OrderService {
     //根据订单编号查询明细
     Map<String,Object> getDetail(Integer oid);
 
+    //确认收货
+    boolean config(Integer oid);
+
 }

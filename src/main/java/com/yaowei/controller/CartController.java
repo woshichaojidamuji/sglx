@@ -31,7 +31,7 @@ public class CartController {
         model.addAttribute("fruit",fruit);
         return "cart";
     }
-
+    //添加购物车
     @PostMapping(value = "/addCart", produces = "application/json;charset=utf-8")
     @ResponseBody
     public String addCart(HttpServletRequest request, Integer fid, Integer quantity){
@@ -52,9 +52,9 @@ public class CartController {
         return JSON.toJSONString(total);
     }
 
-    @GetMapping(value = "/detele", produces = "application/json;charset=utf-8")
+    @GetMapping(value = "/delete", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String detele(HttpServletRequest request,Integer fid){
+    public String delete(HttpServletRequest request,Integer fid){
         HttpSession session = request.getSession();
         Map<String, Object> user = (Map<String, Object>) session.getAttribute("user");
         Integer uid = Integer.parseInt(user.get("uid").toString());

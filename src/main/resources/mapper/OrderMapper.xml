@@ -32,5 +32,8 @@
         INSERT INTO detail (oid, fid, name, img, price, amount) VALUES(#{oid},#{fid},#{name},#{img},#{price},#{amount})
     </insert>
 
+    <update id="config" parameterType="int">
+        UPDATE order SET status = 2 WHERE oid = #{oid}
+    </update>
 
 </mapper>

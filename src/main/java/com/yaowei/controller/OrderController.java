@@ -40,7 +40,7 @@ public class OrderController {
         boolean submit = orderService.submit(uid, name, tel, address, fid);
         return "{\"success\":"+submit+"}";
     }
-
+    //订单详情
     @GetMapping("/checkout")
     public String checkout(HttpServletRequest request, Integer[] fid, Model model){
         HttpSession session = request.getSession();
@@ -61,5 +61,11 @@ public class OrderController {
         return "order-details";
     }
 
+    @GetMapping(value = "/configOrder",  produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String configOrder(Integer oid){
+        boolean b = orderService.config(oid);
+        return "{\"success\":"+b+"}";
+    }
 
 }

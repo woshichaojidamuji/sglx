@@ -87,4 +87,10 @@ public class OrderServiceImpl implements OrderService {
         orderList.put("fruit",fruit);
         return orderList;
     }
+
+    @Override
+    public boolean config(Integer oid) {
+        int i = orderMapper.config(oid);
+        return i == 1;
+    }
 }

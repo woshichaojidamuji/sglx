@@ -140,7 +140,7 @@
                                         <h6 class="product-name">${fruit.name}</h6>
                                         <div class="number-input">
                                             <button class="minus" onclick="updateQuantity(this,${fruit.fid},'sub')"></button>
-                                            <input class="quantity" min="1" name="quantity" value="${fruit.quantity}" type="number">
+                                            <input readonly class="quantity" min="1" name="quantity" value="${fruit.quantity}" type="number">
                                             <button class="plus" onclick="updateQuantity(this,${fruit.fid},'add')"></button>
                                         </div>
                                         <h6 class="product-price">${fruit.price}</h6>

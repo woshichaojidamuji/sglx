@@ -63,7 +63,7 @@ public class UserController {
     public String toEditPassword(){
         return "editPassword";
     }
-
+    //用户信息
     @PostMapping(value = "/editPassword", produces = "application/json;charset=utf-8")
     @ResponseBody
     public String editPassword(HttpServletRequest request, String password, String newPassword, String confirmPassword){

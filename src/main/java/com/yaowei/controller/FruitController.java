@@ -17,7 +17,7 @@ public class FruitController {
 
     @Autowired
     private FruitService fruitService;
-
+    //水果详情
     @GetMapping("/list")
     public String list(String name, Integer kid, @RequestParam(required = false,defaultValue = "1") Integer page, Model model) {
         List<Fruit> fruits = fruitService.query(name, kid, page);

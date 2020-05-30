@@ -18,4 +18,7 @@ public interface OrderMapper {
     //订单明细表插入数据
     int doInsertDetail(Map<String,Object> param);
 
+    //确认收货
+    int config(Integer oid);
+
 }

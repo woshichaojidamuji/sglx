@@ -51,7 +51,7 @@
                             <h1 class="mb-20 light">Order <span>Online</span>, Save <span>Your </span>Time</h1>
                             <p class="mb-40 mr-120 light">Ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo do consequat.</p>
                             <div class="hero-btn">
-                                <a href="shop.jsp" class="theme-btn">Order Now</a>
+                                <a href="${path}/list" class="theme-btn">Order Now</a>
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@
                             <h1 class="mb-20 light">World wide <span>free shipping</span></h1>
                             <p class="mb-40 mr-120 light">Ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo do consequat.</p>
                             <div class="hero-btn">
-                                <a href="shop.jsp" class="theme-btn">Order Now</a>
+                                <a href="${path}/list" class="theme-btn">Order Now</a>
                             </div>
                         </div>
 

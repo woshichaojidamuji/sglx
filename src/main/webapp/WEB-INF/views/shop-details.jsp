@@ -39,7 +39,6 @@
                         }
                         if (res.success){
                             alert("添加成功");
-                            location = "${path}/fruit?fid="+fid;
                         }else {
                             alert("添加失败，库存不足");
                         }
